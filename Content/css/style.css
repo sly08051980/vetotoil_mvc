@@ -1,0 +1,108 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Serif', serif;
+}
+
+.navbar {
+    background: linear-gradient(white, purple);
+}
+h1,h2,strong,span{
+    color: purple;
+  
+}
+h1,h2{
+    font-style: italic;
+    font-weight: 600;
+}
+strong{
+    font-style: italic;
+}
+
+.taille-image{
+    width: 8%;
+}
+.btn-custom {
+    background-color:purple !important;
+width: 100%;
+color: white !important;
+    font-size:17px;
+    padding:16px 31px;
+    text-decoration:none;
+   
+  }
+
+footer {
+	background: linear-gradient(white, purple);
+	text-align: center;
+	padding: 10px;    
+}
+footer li{
+    list-style: none;
+}
+footer li a{
+  
+    text-decoration: none;
+}
+.bg-instagram{
+   
+        background: #f09433; 
+      background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+      background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+      background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+        
+}
+.social{
+    padding-right: 1em;
+}
+li{
+    list-style: none;
+}
+
+
+
+
+
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    
+   
+.marge{
+    padding-left: 4em;
+}
+.center{
+    padding-left: 10em;
+}
+.btn-custom{
+    width: 80%;
+}
+}
+
+@media only screen and (min-width: 1200px) {
+    .degrader {
+        background: linear-gradient(white, purple);
+        flex: 0 0 16.66667%; /* passer de la col-3 a la deux*/
+        max-width: 16.66667%;
+    }
+    .espace{padding-left: 7em;}
+    .justify-space-around {
+        justify-content: space-around !important;
+      }
+      .btn-custom{
+        width: 40%;
+        cursor:pointer;
+      }
+          .btn-custom:hover {
+        background-color:pink !important;
+        color: purple !important;
+      
+    }
+  
+    .form-list-item:hover {
+        background-color: purple ;
+        cursor: pointer;
+    }
+}
