@@ -11,11 +11,45 @@ class Controller_acces extends Controller
     {
         $this->render('home');
     }
-
+    //#######################################################################################################################
+    //fonction inscription
+    //#######################################################################################################################
     public function action_acces_inscription()
     {
         $this->render('acces_inscription');
     }
+
+    public function action_acces_inscription_valider()
+    {
+        // $m = Model::get_model();
+
+        
+        // $isRegistered = [
+        //     'inscription' => $m->get_inscription_valider(
+        //           $_POST
+        //       )
+        //     ];
+        //     if ($isRegistered) {
+        //         $user = $isRegistered[0]; 
+        //         $this->render('ficheUsers', ['email' => $user->email]);
+        //     } else {
+        //         $this->render('error');
+        //     }
+        $m = Model::get_model();
+
+        $userData =['inscription'=> $m->get_inscription_valider($_POST)];
+    
+        if ($userData) {
+            $this->render('ficheUsers', $userData);
+        } else {
+            $this->render('error');
+        }
+        }
+public function action_fiche_users(){
+    $m = Model::get_model();
+
+}
+
     public function action_acces_connexion()
     {
         $this->render('acces_connexion');
@@ -24,9 +58,4 @@ class Controller_acces extends Controller
     {
         $this->render('acces_inscription_pro');
     }
-  
-
-
-
-    
 }

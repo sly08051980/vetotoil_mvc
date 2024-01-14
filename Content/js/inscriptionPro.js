@@ -5,7 +5,18 @@ console.log("script charger");
 // 39860733300059
 // https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/39860733300059
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
+
+
+//#################################################################################################
+//page inscription_pro
+//#################################################################################################
+
+  let inscriptionPro=document.getElementById('inscriptionPro');
+  if(inscriptionPro){
+
   const url = "https://api.insee.fr/entreprises/sirene/V3/siret/";
   const accessToken = "8a31d28c-6c89-3dcc-afbe-ae5dd32ed3da";
   const button = document.getElementById("button");
@@ -150,6 +161,7 @@ if (inputValue.length === 9) {
 } else {
     element.style.backgroundColor = ''; // Réinitialise la couleur si la longueur n'est pas égale à 10
     element.style.color = '';
+}
 }
 }
 });

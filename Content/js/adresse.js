@@ -1,6 +1,13 @@
 console.log("script chargé");
 
 document.addEventListener('DOMContentLoaded', function() {
+
+let inscription=document.getElementById('inscription');
+
+if(inscription){
+
+
+
     let adresse = document.getElementById('adresse');
     let nbrLetter = 0;
     let ulListe = document.getElementById('list');
@@ -62,5 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ulListe.innerHTML = "";
             ulListe.style.display = "none";
         });
+    }
     }
 });
