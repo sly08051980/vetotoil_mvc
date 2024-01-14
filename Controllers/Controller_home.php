@@ -19,4 +19,8 @@ class Controller_home extends Controller
     {
         $this->render('rgpd');
     }
+    public function action_contact()
+    {
+        $this->render('contact');
+    }
 }
