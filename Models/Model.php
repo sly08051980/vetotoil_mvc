@@ -37,7 +37,7 @@ class Model
     //#######################################################################################################################
     //fonction envoyer mail
     //#######################################################################################################################
-    public function envoyer_contact_email($nom, $prenom, $email, $telephone, $message)
+    public function get_envoyer_contact_email($nom, $prenom, $email, $telephone, $message)
     {
 
         $mail = new PHPMailer(true);

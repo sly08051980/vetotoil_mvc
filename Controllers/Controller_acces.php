@@ -11,6 +11,21 @@ class Controller_acces extends Controller
     {
         $this->render('home');
     }
+    public function action_contact_email(){
+        {
+            $nom = isset($_POST['nom']) ? $_POST['nom'] : "";
+            $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : "";
+            $email = isset($_POST['email']) ? $_POST['email'] : "";
+            $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : "";
+            $message = isset($_POST['message']) ? $_POST['message'] : "";
+        
+            $m = Model::get_model();
+            $m->get_envoyer_contact_email($nom, $prenom, $email, $telephone, $message);
+        
+            $this->render("home");
+    
+        }
+    }
     //#######################################################################################################################
     //fonction inscription
     //#######################################################################################################################

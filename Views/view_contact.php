@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <form class="col-lg-8" action="?home&action=contact_email" method="POST">
+                <form class="col-lg-8" action="?controller=acces&action=contact_email" method="POST">
                     <div class="row justify-content-center">
                         <div class="col-lg-5">
 
