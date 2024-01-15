@@ -1,4 +1,5 @@
-<div class="container mt-5">
+<div class="container mt-5 ">
+    <div class="row pt-5">
         <h1 class="text-center">Politique de confidentialité</h1>
         <p>
             Le site web localhost/vetotoil est détenu par vetotoil, qui est un contrôleur de données de vos données
@@ -111,3 +112,4 @@
             pouvez envoyer un courriel à <a href="mailto:regnier.sylvain.afpa@gmail.com">regnier.sylvain.afpa@gmail.com</a>.
         </p>
     </div>
+</div>

@@ -1,4 +1,5 @@
 <div class="container mt-5">
+    <div class="row pt-5">
         <h1 class="text-center">Mentions-Legales</h1>
         <h2 class="mt-4">Définitions</h2>
         <p><b>Client :</b> tout professionnel ou personne physique capable au sens des articles 1123 et suivants du Code
@@ -422,6 +423,6 @@
 
 
 
-
+</div>
 
     </div>
