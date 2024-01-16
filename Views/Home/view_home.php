@@ -128,10 +128,10 @@
             </div>
         </div>
         <div class="row justify-content-center py-5">
-            <div class="col-md-3 col-12 text-center align-self-center pt-2">
+            <div class="col-md-4 col-12 text-center align-self-center pt-2">
                <a href="?controller=acces&action=acces_inscription"> <button type="button" class="btn btn-custom rounded-pill">Inscription</button></a>
             </div>
-            <div class="col-md-3 col-12 text-center align-self-center pt-2">
+            <div class="col-md-4 col-12 text-center align-self-center pt-2">
               <a href="?controller=acces&action=acces_connexion">  <button type="button" class="btn btn-custom rounded-pill">Connexion</button></a>
             </div>
         </div>

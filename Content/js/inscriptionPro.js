@@ -5,7 +5,7 @@ console.log("script charger");
 // 39860733300059
 // https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/39860733300059
 
-
+//pensez a modifier 5 jours avant l examen la clef 
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if(inscriptionPro){
 
   const url = "https://api.insee.fr/entreprises/sirene/V3/siret/";
-  const accessToken = "8a31d28c-6c89-3dcc-afbe-ae5dd32ed3da";
+  const accessToken = "e18a9362-cad2-3738-bc85-f75d9144f292";
   const button = document.getElementById("button");
 
   //#########################################
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const siret = document.getElementById("siret").value;
     console.log("test : ", siret);
 
-        //#########################################
+ //#########################################
   //recherche ds l api siret de l insee les info
   //#########################################
 

@@ -13,7 +13,7 @@
                                 <label for="siret" class="form-label">Numero Siret</label>
                                 <input type="text" class="form-control" id="siret" aria-describedby="siret">
 
-                                <button type="button" class="btn btn-custom rounded-pill "
+                                <button type="button" class="btn btn-custom rounded-pill"
                                     id="button">Rechercher</button>
 
                             </div>
@@ -87,7 +87,7 @@
             <!-- Bouton au bas du milieu -->
             <div class="row justify-content-center pt-5">
                 <div class="col-lg-8 text-center">
-                    <button type="submit" class="btn btn-custom rounded-pill">Submit</button>
+                    <input type="submit" class="btn btn-custom rounded-pill" value="Envoyer">
                 </div>
             </div>
             </form>

@@ -113,7 +113,7 @@ class Model
                 'ville' => $ville,
                 'telephone' => $telephone,
                 'codePostal' => $codePostal
-                // Ajoutez d'autres champs selon vos besoins
+                
             ];
 
         } catch (PDOException $e) {

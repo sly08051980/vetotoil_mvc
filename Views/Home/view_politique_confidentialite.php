@@ -86,6 +86,13 @@
             des tiers. Nous vous encourageons à être attentif lorsque vous quittez notre site web et à lire les
             déclarations de confidentialité de chaque site web susceptible de collecter des informations personnelles.
         </p>
+        <h2 class="mt-4">Images du site :</h2>
+        <p>
+        Les images présentes sur ce site ont été générées par le modèle DALL-E2, propriété d'OpenAI. En conséquence, toutes les images 
+        générées par DALL-E2 sont la propriété intellectuelle exclusive d'OpenAI, comprenant, mais sans s'y limiter, les droits d'auteur, 
+        les droits de reproduction, les droits de distribution, et tout autre droit de propriété intellectuelle associé. <a href="https://openai.com/policies/usage-policies">Politique OpenAI</a>
+        </p>
+
 
         <h2 class="mt-4">Sécurité de l'information :</h2>
         <p>
