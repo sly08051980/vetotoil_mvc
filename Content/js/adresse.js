@@ -1,11 +1,12 @@
 console.log("script chargé");
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
 let inscription=document.getElementById('inscription');
 
 if(inscription){
-
 
 
     let adresse = document.getElementById('adresse');
@@ -70,5 +71,7 @@ if(inscription){
             ulListe.style.display = "none";
         });
     }
+
+
     }
 });

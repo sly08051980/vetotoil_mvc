@@ -20,7 +20,7 @@
                     <li class='nav-item'>
                         <a class='nav-link active' aria-current='page' href="?controller=acces&action=acces_inscription">Inscription</a>
                     <li class='nav-item'>
-                        <a class='nav-link active' aria-current='page' href='?controller=acces&action=acces_contact'>Contact</a>
+                        <a class='nav-link active' aria-current='page' href='?controller=home&action=contact'>Contact</a>
                 </ul>
 
             </div>

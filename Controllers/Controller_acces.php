@@ -21,7 +21,7 @@ class Controller_acces extends Controller
 
     public function action_acces_inscription_valider()
     {
-    
+        
         $m = Model::get_model();
 
         $userData =['inscription'=> $m->get_inscription_valider($_POST)];

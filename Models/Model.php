@@ -121,4 +121,20 @@ class Model
         }
         // return $requete->fetchAll(PDO::FETCH_OBJ);
     }
+     //#######################################################################################################################
+    //fonction connexion session
+    //#######################################################################################################################
+    public function get_session_connect(){
+       try {
+      $email=$_POST['email'];
+      $mdp=$_POST['password'];
+
+        $requete=$this->bd->prepare('SELECT * FROM patient WHERE email=:email AND mdp=:mdp');
+        $requete->execute(array(':email'=>$email,'mdp'=>$mdp));
+    }catch (PDOException $e) {
+        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+
+    }
+    return $requete->fetchAll(PDO::FETCH_OBJ);
+}
 }
