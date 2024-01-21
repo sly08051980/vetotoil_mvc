@@ -6,12 +6,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let inscription=document.getElementById('inscription');
 
+//#################################################################################################
+//se lance sur page inscription
+//#################################################################################################
+
 if(inscription){
 
+    
 
     let adresse = document.getElementById('adresse');
     let nbrLetter = 0;
     let ulListe = document.getElementById('list');
+
+ 
 
     adresse.addEventListener("input", async (eventInput) => {
         nbrLetter = eventInput.target.value.length;
@@ -19,6 +26,9 @@ if(inscription){
 
         await findAdress(rue, nbrLetter);
     });
+
+
+//appel de l api et affiche le resultat
 
     async function findAdress(rue, nbrLetter) {
         if (nbrLetter > 4) {
@@ -71,7 +81,15 @@ if(inscription){
             ulListe.style.display = "none";
         });
     }
+//#################################################################################################
+//verifie le click en dehors du champs de la liste
+//#################################################################################################
 
+    document.addEventListener('click', function(event) {
+        if (!ulListe.contains(event.target) && event.target !== adresse) {
+          ulListe.style.display = 'none';
+        }
+      });
 
     }
 });

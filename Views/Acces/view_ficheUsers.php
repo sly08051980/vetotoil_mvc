@@ -4,7 +4,7 @@
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="../images/userdefaut.webp" class="img-fluid rounded-start" alt="vetotoil image user">
+                    <img src="./Content/img/userdefaut.png" class="img-fluid rounded-start" alt="vetotoil image user">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -22,17 +22,72 @@
         </div>
 
         <div class="row justify-content-center">
-                        <div class="col-lg-8 text-center">
-                            <button type="submit" class="btn btn-primary" id="boutonAnimal">Ajouter Animal</button>
+            <div class="col-lg-8 text-center">
+                <button type="submit" class="btn btn-primary" id="boutonAnimal">Ajouter Animal</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row invisible" id="afficherAnimal">
+        <div class="col-6">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="./Content/img/userdefaut.png" class="img-fluid rounded-start" alt="vetotoil image user">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <form class="col-lg-8" id="choix">
+                                <div class="mb-3">
+                                    <label for="typeAnimal" class="form-label">Type d'animal</label>
+                                    <select class="form-select" id="typeAnimal" name="typeAnimal" aria-describedby="choix de l'animal">
+                                        <option value="selection" selected>Choisissez une option</option>
+                                        <option value="Chien">Chien</option>
+                                        <option value="Chat">Chat</option>
+                                    </select>
+                                </div>
+                            </form>
+                            <p id="confirmationMessage" class="card-text">test</p>
+</div>
+                        <div class="row" id="descriptionAnimal">
+                        <form action="" method="">
+                        <div class="mb-3">
+                                <label for="prenom" class="form-label">Race de votre Animal</label>
+                                <p class="fs-6 text-danger">Si vous ne trouvez pas la race choisir autre</p>
+                                <input type="text" class="form-control" id="race" name="race" aria-describedby="race de votre animal">
+                            </div>
+                            <ul id="raceList"></ul>
+                            <div class="mb-3">
+                                <label for="prenom" class="form-label">Prenom de votre Animal</label>
+                                <input type="text" class="form-control" id="prenom" name="prenom" aria-describedby="prenom de votre animal">
+                            </div>
+                            <div class="mb-3">
+                                <label for="dateNaissance" class="form-label">Date de naissance</label>
+                                <input type="text" class="form-control" id="dateNaissance" name="dateNaissance" aria-describedby="date de naissance de votre animal">
+                            </div>
+
+                         
+                            <div class="mb-3">
+                                <input type="hidden" class="form-control" id="raceValide" name="raceValide" aria-describedby="prenom de votre animal">
+                            </div>
+
+                            <form>
                         </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
-<div class="row invisible"id="afficherAnimal">
+
+<div class="row invisible" id="">
     <div class="col-6">
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="../images/userdefaut.webp" class="img-fluid rounded-start" alt="vetotoil image user">
+                    <img src="./Content/img/userdefaut.png" class="img-fluid rounded-start" alt="vetotoil image user">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

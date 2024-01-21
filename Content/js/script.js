@@ -60,12 +60,88 @@ document.addEventListener("DOMContentLoaded", function () {
     //gestion de l affichage pour ajouter un animal apres l inscription
 
     let boutonAnimal = document.getElementById("boutonAnimal");
-    let afficherAnimal = document.getElementById("afficherAnimal");
+  
 
     boutonAnimal.addEventListener("click", function () {
-      afficherAnimal.classList.toggle("invisible"); //affiche la class invisible
+      document.getElementById("afficherAnimal").classList.toggle("invisible"); //affiche la class invisible
+    
     });
+
+    //gestion de l action en fonction du select 
+
+    const form = document.getElementById("choix");
+    let raceanimaux;
+    const typeAnimal = document.getElementById("typeAnimal");
+    const race = document.getElementById("race");
+    const raceList = document.getElementById("raceList"); 
+    document.getElementById('descriptionAnimal').style.display="none";
+    
+    typeAnimal.addEventListener("change", function () {
+      if (typeAnimal.value === "selection") {
+        console.log("selection");
+        document.getElementById('descriptionAnimal').style.display="none";
+      } else {
+        document.getElementById('descriptionAnimal').style.display="block";
+        const formData = new FormData(form);
+    
+        fetch('?controller=acces&action=fiche_users', {
+          method: 'POST',
+          body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+          raceanimaux = data.raceanimaux;
+          console.log("test: ", raceanimaux);
+        })
+        .catch(error => {
+          console.error('erreur lors de la requete', error);
+        });
+      }
+    });
+    
+    race.addEventListener("input", function () {
+      const searchTerm = race.value.toLowerCase();
+    
+      // recherche les resultat en fonction de ce qui est taper
+      const resultat = raceanimaux.filter(obj => obj.race_animal.toLowerCase().includes(searchTerm));
+    
+      
+      afficheResultat(resultat);
+    });
+    //affiche les resultats dans la liste
+    function afficheResultat(results) {
+      raceList.innerHTML = "";
+    if(raceList.style.display="none"){
+      raceList.style.display="block"
+    }
+      results.forEach(result => {
+        const listItem = document.createElement("li");
+    
+        listItem.textContent = result.race_animal;
+    
+        
+        listItem.dataset.nomRace = result.race_animal;
+        listItem.dataset.idRace = result.id_race;
+    
+        clickLi(listItem,raceList);
+    
+        raceList.appendChild(listItem);
+      });
+    }
+    
+    function clickLi(listItem,raceList) {
+      listItem.addEventListener("click", (event) => {
+        const li = event.currentTarget;
+    
+        const nomRace = li.dataset.nomRace;
+        const idRace = li.dataset.idRace;
+    
+        document.getElementById('race').value = nomRace;
+        // document.getElementById('race').value = idRace;
+        raceList.style.display = "none";
+      });
+    }
+    
+    
   }
-
 });
-

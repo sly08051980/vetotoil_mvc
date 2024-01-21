@@ -22,9 +22,7 @@ abstract class Controller		//Ceci est le controleur par defaut
 			
 			if (isset($_GET['controller'])) {
 				$controller_actif = ucfirst($_GET['controller']);
-	
-				
-	
+	 	
 			} else {
 				$controller_actif="Home";
 			}

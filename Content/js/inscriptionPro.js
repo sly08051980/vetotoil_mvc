@@ -17,6 +17,34 @@ document.addEventListener("DOMContentLoaded", function () {
   let inscriptionPro=document.getElementById('inscriptionPro');
   if(inscriptionPro){
 
+//     const urlForToken = 'https://api.insee.fr/token';
+// const data = 'grant_type=client_credentials';
+// const authHeader = 'Basic ZnhoR3hnUkJyUDFvZ3ZjUWNNSmR0c0hYbXp3YTpWM2RhVTZ4ZFdTNTFJejRvVVVaZFRXak1wZlVh';
+// const requestOptions = {
+//   method: 'POST',
+//   headers: {
+//     'Authorization': authHeader,
+//     'Content-Type': 'application/x-www-form-urlencoded',
+//     'Accept': "application/json"
+
+//   },
+//   body: data,
+//   agent: new XMLHttpRequest(), // Cela ne désactive pas la vérification SSL, car XMLHttpRequest ne fournit pas de moyen direct de le faire
+// };
+
+// fetch(urlForToken, requestOptions)
+//   .then(response => response.json())
+//   .then(data => console.log(data))
+//   .catch(error => console.error(error));
+
+
+// console.log(response)
+//   return false;
+
+
+
+
+
   const url = "https://api.insee.fr/entreprises/sirene/V3/siret/";
   const accessToken = "e18a9362-cad2-3738-bc85-f75d9144f292";
   const button = document.getElementById("button");

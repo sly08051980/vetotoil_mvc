@@ -75,6 +75,8 @@ class Model
 
         try {
 
+            print_r('coucou');
+
             $nom = isset($_POST['nom']) ? $_POST['nom'] : "";
             $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : "";
             $adresse = isset($_POST['adresse']) ? $_POST['adresse'] : "";
@@ -120,6 +122,16 @@ class Model
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
         // return $requete->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function get_find_animal($animal){
+        try{
+            $requete=$this->bd->prepare('SELECT race_animal,id_race FROM race JOIN type ON race.id_type=type.id_type WHERE type.type_animal=:animal');
+            $requete->execute(array(':animal'=>$animal));
+        }catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+    
+        }
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
      //#######################################################################################################################
     //fonction connexion session
