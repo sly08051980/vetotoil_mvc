@@ -55,4 +55,22 @@ class Controller_acces extends Controller
     {
         $this->render('acces_inscription_pro');
     }
+
+    //#######################################################################################################################
+    //fonction inscription professionnel
+    //#######################################################################################################################
+
+    public function action_inscription_pro(){
+     
+
+        $m = Model::get_model();
+
+        $proData =['professionnel' => $m->get_inscription_pro($_POST)];
+    
+        if ($proData) {
+            $this->render('fiche_pro', $proData);
+        } else {
+            $this->render('error');
+        }
+    }
 }

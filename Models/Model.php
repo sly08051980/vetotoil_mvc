@@ -15,7 +15,7 @@ class Model
 
     private function __construct()
     {
-        
+
         try {
             $this->bd = new PDO('mysql:host=localhost;dbname=vetotoil', 'root', '');
             $this->bd->query("SET NAMES 'utf8'");
@@ -75,7 +75,6 @@ class Model
 
         try {
 
-            print_r('coucou');
 
             $nom = isset($_POST['nom']) ? $_POST['nom'] : "";
             $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : "";
@@ -115,7 +114,7 @@ class Model
                 'ville' => $ville,
                 'telephone' => $telephone,
                 'codePostal' => $codePostal
-                
+
             ];
 
         } catch (PDOException $e) {
@@ -123,30 +122,93 @@ class Model
         }
         // return $requete->fetchAll(PDO::FETCH_OBJ);
     }
-    public function get_find_animal($animal){
-        try{
-            $requete=$this->bd->prepare('SELECT race_animal,id_race FROM race JOIN type ON race.id_type=type.id_type WHERE type.type_animal=:animal');
-            $requete->execute(array(':animal'=>$animal));
-        }catch (PDOException $e) {
+    public function get_find_animal($animal)
+    {
+        try {
+            $requete = $this->bd->prepare('SELECT race_animal,id_race FROM race JOIN type ON race.id_type=type.id_type WHERE type.type_animal=:animal');
+            $requete->execute(array(':animal' => $animal));
+        } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
-    
+
         }
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
-     //#######################################################################################################################
+    //#######################################################################################################################
     //fonction connexion session
     //#######################################################################################################################
-    public function get_session_connect(){
-       try {
-      $email=$_POST['email'];
-      $mdp=$_POST['password'];
+    public function get_session_connect()
+    {
+        try {
+            $email = $_POST['email'];
+            $mdp = $_POST['password'];
 
-        $requete=$this->bd->prepare('SELECT * FROM patient WHERE email=:email AND mdp=:mdp');
-        $requete->execute(array(':email'=>$email,'mdp'=>$mdp));
-    }catch (PDOException $e) {
-        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+            $requete = $this->bd->prepare('SELECT * FROM patient WHERE email=:email AND mdp=:mdp');
+            $requete->execute(array(':email' => $email, 'mdp' => $mdp));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
 
+        }
+        return $requete->fetchAll(PDO::FETCH_OBJ);
     }
-    return $requete->fetchAll(PDO::FETCH_OBJ);
-}
+
+    public function get_inscription_pro(array $data)
+    {
+        try {
+            $siret = isset($_POST['siret']) ? $_POST['siret'] : "";
+            $nomSociete = isset($_POST['nomSociete']) ? $_POST['nomSociete'] : "";
+            $profession = isset($_POST['profession']) ? $_POST['profession'] : "";
+            $nomDirigeant = isset($_POST['nomDirigeant']) ? $_POST['nomDirigeant'] : "";
+            $adresse = isset($_POST['adresse']) ? $_POST['adresse'] : "";
+            $complementAdresse = isset($_POST['complementAdresse']) ? $_POST['complementAdresse'] : "";
+            $codePostal = isset($_POST['codePostal']) ? $_POST['codePostal'] : "";
+            $ville = isset($_POST['ville']) ? $_POST['ville'] : "";
+            $telephoneSociete = isset($_POST['telephoneSociete']) ? $_POST['telephoneSociete'] : "";
+            $telephoneDirigeant = isset($_POST['telephoneDirigeant']) ? $_POST['telephoneDirigeant'] : "";
+            $email = isset($_POST['email']) ? $_POST['email'] : "";
+            $password = isset($_POST['password']) ? $_POST['password'] : "";
+            $administrateur = "Admin";
+
+            $dates = date("Y-m-d");
+            $requete = $this->bd->prepare('INSERT INTO societe (siret, nom_societe, profession, nom_dirigeant, adresse, complement_adresse, 
+            code_postal, ville, telephone_societe ,telephone_dirigeant,email,password,date_creation,date_resiliation,date_validation,status,droit_utilisateur) 
+             VALUES (:siret, :nomSociete, :profession, :nomDirigeant, :adresse, :complementAdresse, :codePostal, :ville, :telephoneSociete, 
+             :telephoneDirigeant, :email,:passw,:dates,NULL,NULL,NULL,:administrateur)');
+
+
+            $requete->execute([
+                ':siret' => $siret,
+                ':nomSociete' => $nomSociete,
+                ':profession' => $profession,
+                ':nomDirigeant' => $nomDirigeant,
+                ':adresse' => $adresse,
+                ':complementAdresse' => $complementAdresse,
+                ':codePostal' => $codePostal,
+                ':ville' => $ville,
+                ':telephoneSociete' => $telephoneSociete,
+                ':telephoneDirigeant' => $telephoneDirigeant,
+                ':email' => $email,
+                ':passw' => $password,
+                ':dates' => $dates,
+                ':administrateur' => $administrateur
+            ]);
+  
+            return [
+                'siret' => $siret,
+                'nomSociete' => $nomSociete,
+                'profession' => $profession,
+                'nomDirigeant' => $nomDirigeant,
+                'adresse' => $adresse,
+                'complementAdresse' => $complementAdresse,
+                'codePostal' => $codePostal,
+                'ville' => $ville,
+                'telephoneSociete' => $telephoneSociete,
+                'telephoneDirigeant' => $telephoneDirigeant,
+                'email' => $email,
+                'administrateur' => $administrateur
+
+            ];
+        }  catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+    }
 }

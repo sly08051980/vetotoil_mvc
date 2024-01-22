@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   const url = "https://api.insee.fr/entreprises/sirene/V3/siret/";
-  const accessToken = "e18a9362-cad2-3738-bc85-f75d9144f292";
+  const accessToken = "1e39905c-11bd-3721-be2c-01a4f51c0228";
   const button = document.getElementById("button");
 
   //#########################################

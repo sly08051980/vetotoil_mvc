@@ -1,17 +1,37 @@
 <div class="container pt-5" id="inscriptionPro">
+
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
             <div class="row">
                 <div class="col-12 justify-content-center py-5">
-                    <h1 class="text-center">Inscription</h1>
+                    <h1 class="text-center">Inscription Pour les Professionnels</h1>
                 </div>
             </div>
             <div class="row justify-content-center">
-                <form class="col-lg-8">
+                <form class="col-lg-8" method="POST" action="?controller=acces&action=inscription_pro">
                     <div class="row">
                         <!-- Colonnes de gauche -->
                         <div class="col-lg-5">
                             <div class="mb-3">
                                 <label for="siret" class="form-label">Numero Siret</label>
-                                <input type="text" class="form-control" id="siret" aria-describedby="siret">
+                                <input type="text" class="form-control" name ="siret" id="siret" aria-describedby="siret">
 
                                 <button type="button" class="btn btn-custom rounded-pill"
                                     id="button">Rechercher</button>
@@ -19,11 +39,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="nomSociete" class="form-label">Nom Société</label>
-                                <input type="text" class="form-control" id="nomSociete" aria-describedby="nomSociete">
+                                <input type="text" class="form-control" name="nomSociete" id="nomSociete" aria-describedby="nomSociete">
                             </div>
                             <div class="mb-3">
-                                <label for="profession" class="form-label">Profession</label>
-                                <select class="form-select" id="profession" aria-label="Sélectionnez une option">
+                                <label name = "profession" for="profession" class="form-label">Profession</label>
+                                <select class="form-select" name ="profession" id="profession" aria-label="Sélectionnez une option">
                                     <option selected>Choisissez...</option>
                                     <option value="Vétérinaire">Vétérinaire</option>
                                     <option value="Toiletteur">Toiletteur</option>
@@ -32,22 +52,22 @@
                             </div>
                             <div class="mb-3">
                                 <label for="nomDirigeant" class="form-label">Nom du Dirigeant</label>
-                                <input type="text" class="form-control" id="nomDirigeant"
+                                <input type="text" class="form-control" name="nomDirigeant" id="nomDirigeant"
                                     aria-describedby="nomDirigeant">
                                 <ul id="list"></ul></label>
                             </div>
                             <div class="mb-3">
                                 <label for="adresse" class="form-label">Adresse</label>
-                                <input type="text" class="form-control" id="adresse" aria-describedby="adresse">
+                                <input type="text" class="form-control" name="adresse" id="adresse" aria-describedby="adresse">
                             </div>
                             <div class="mb-3">
                                 <label for="complementAdresse" class="form-label">Complément Adresse</label>
-                                <input type="text" class="form-control" id="complementAdresse"
+                                <input type="text" class="form-control" name="complementAdresse" id="complementAdresse"
                                     aria-describedby="complementAdresse">
                             </div>
                             <div class="mb-3">
                                 <label for="codePostal" class="form-label">Code Postal</label>
-                                <input type="text" class="form-control" id="codePostal" aria-describedby="codePostal">
+                                <input type="text" class="form-control" name="codePostal" id="codePostal" aria-describedby="codePostal">
                             </div>
                         </div>
 
@@ -55,26 +75,26 @@
                         <div class="col-lg-5">
                             <div class="mb-3">
                                 <label for="ville" class="form-label">Ville</label>
-                                <input type="text" class="form-control" id="ville" aria-describedby="ville">
+                                <input type="text" class="form-control" name="ville" id="ville" aria-describedby="ville">
                             </div>
                             <div class="mb-3">
                                 <label for="telephoneSociete" class="form-label">Téléphone Société</label>
-                                <input type="tel" class="form-control" id="telephoneSociete"
+                                <input type="tel" class="form-control" name = "telephoneSociete" id="telephoneSociete"
                                     aria-describedby="telephoneSociete" pattern="[0-9]{10}">
                             </div>
                             <div class="mb-3">
                                 <label for="telephoneDirigeant" class="form-label">Téléphone Dirigeant</label>
-                                <input type="tel" class="form-control" id="telephoneDirigeant"
+                                <input type="tel" class="form-control" name="telephoneDirigeant" id="telephoneDirigeant"
                                     aria-describedby="telephoneDirigeant" pattern="[0-9]{10}">
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" aria-describedby="email">
+                                <input type="email" class="form-control" name="email" id="email" aria-describedby="email">
                             </div>
                             <div class="mb-3">
 
                                 <label for="password" class="form-label">Mot de passe</label>
-                                <input type="password" class="form-control" id="password">
+                                <input type="password" class="form-control" name="password" id="password">
                             </div>
                             <div class="mb-3">
                                 <label for="repassword" class="form-label">Confirmer le mot de passe</label>
