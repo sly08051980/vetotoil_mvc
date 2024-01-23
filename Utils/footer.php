@@ -5,13 +5,13 @@
             <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                 <div class="d-flex justify-content-center">
                     <img src="./Content/img/logo.png" alt="logo-vetotoil" height="30px" width="30px" class="me-3">
-                    <h5 class="text-uppercase mb-4 font-weight-bold ">Vetotoil</h5>
+                    <h6 class="text-uppercase mb-4 font-weight-bold ">Vetotoil</h6>
                 </div>
                 <p>Pour la prise de rendez vous de votre animal préféré</p>
 
             </div>
             <div class="col-md-2 col-lg-2 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 font-weight-bold ">Mes services</h5>
+                <h6 class="text-uppercase mb-4 font-weight-bold ">Mes services</h6>
 
 
                 <ul class='list-unstyled text-center'>
@@ -25,7 +25,7 @@
 
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto pt-3">
-                <h5 class="text-uppercase mb-4 font-weight-bold">Mention Légale</h5>
+                <h6 class="text-uppercase mb-4 font-weight-bold">Mention Légale</h6>
 
 
                 <ul class='list-unstyled text-center'>
@@ -36,10 +36,10 @@
                 </ul>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 font-weight-bold">Siège Social</h5>
-                <p><i class="bi bi-house mr-3"></i>6 avenue du Maréchal Ney 13011 Marseille</p>
-                <p><i class="bi bi-envelope mr-3"></i>regnier.sylvain.afpa@gmail.com</p>
-                <p><i class="bi bi-phone mr-3"></i>06.20.94.17.45</p>
+                <h6 class="text-uppercase mb-4 font-weight-bold">Siège Social</h6>
+                <p class="fs-6"><i class="bi bi-house mr-3"></i>6 avenue du Maréchal Ney 13011 Marseille</p>
+                <p class="fs-6"><i class="bi bi-envelope mr-3"></i>regnier.sylvain.afpa@gmail.com</p>
+                <p class="fs-6"><i class="bi bi-phone mr-3"></i>06.20.94.17.45</p>
 
 
 

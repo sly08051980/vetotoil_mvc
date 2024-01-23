@@ -1,4 +1,4 @@
-<div class="container pt-5" id="inscriptionPro">
+<div class="container" id="inscriptionPro">
 
 
             <div class="row">
@@ -8,7 +8,7 @@
             </div>
 
             <div class="row justify-content-center">
-                <form class="col-lg-8" method="POST" action="?controller=acces&action=inscription_pro">
+                <form class="col-lg-8" method="POST" action="?controller=pro&action=inscription_pro">
                     <div class="row">
                     <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
@@ -106,5 +106,7 @@
                 </div>
             </div>
             </form>
+            <a href="?controller=pro&action=connexion_pro">Connexion Pro</a>
+           
         </div>
         </div>

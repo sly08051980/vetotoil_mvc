@@ -2,7 +2,7 @@
 //tuto envoie de mail https://www.youtube.com/watch?v=SXKzTjxXW88 -->
 
 
-<div class="container pt-5">
+<div class="container ">
             <div class="row">
                 <div class="col-12 justify-content-center py-5">
                     <h1 class="text-center">Contact</h1>

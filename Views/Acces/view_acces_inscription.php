@@ -1,6 +1,6 @@
 
 
-        <div class="container pt-5" id="inscription">
+        <div class="container" id="inscription">
             <div class="row">
                 <div class="col-12 justify-content-center py-5">
                     <h1 class="text-center">Inscription</h1>

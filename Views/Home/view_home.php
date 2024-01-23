@@ -1,5 +1,5 @@
 <div class="container "id="home">
-    <div class="row justify-content-center pt-5">
+    <div class="row justify-content-center">
         <div class="col-md-3">
             <h1 class="text-center py-5">VETOTOIL</h1>
         </div>
@@ -168,7 +168,7 @@
         <div class="row align-items-center ">
             <div class="col-12 text-center my-4">
                 <a button type="button" class="btn btn-custom rounded-pill"
-                    href="?controller=acces&action=acces_inscription_pro">Découvrir VETOTOIL Pour professionnel</button></a>
+                    href="?controller=pro&action=acces_inscription_pro">Découvrir VETOTOIL Pour professionnel</button></a>
             </div>
         </div>
     </div>

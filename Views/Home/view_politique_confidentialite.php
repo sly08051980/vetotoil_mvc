@@ -1,5 +1,5 @@
 <div class="container mt-5 ">
-    <div class="row pt-5">
+    <div class="row ">
         <h1 class="text-center">Politique de confidentialité</h1>
         <p>
             Le site web localhost/vetotoil est détenu par vetotoil, qui est un contrôleur de données de vos données

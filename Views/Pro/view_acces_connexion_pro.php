@@ -1,12 +1,12 @@
 <div class="container">
             <div class="row">
                 <div class="col-12 justify-content-center py-5">
-                    <h1 class="text-center">Connexion Particulier</h1>
+                    <h1 class="text-center">Connexion Professionnel</h1>
                 </div>
-                <form class="col-lg-5" action="?controller=session&action=session_connect" method="POST">
+                <form class="col-lg-5" action="?controller=pro&action=connexion_professionnel" method="POST">
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                        <label for="siret" class="form-label">Siret</label>
+                        <input type="text" class="form-control" id="siret" name="siret" aria-describedby="siret">
 
                     </div>
                     <div class="mb-3">

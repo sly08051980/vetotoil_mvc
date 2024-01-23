@@ -52,30 +52,7 @@ class Controller_acces extends Controller
     {
         $this->render('acces_connexion');
     }
-    public function action_acces_inscription_pro()
-    {
-        $this->render('acces_inscription_pro');
-    }
-
-    //#######################################################################################################################
-    //fonction inscription professionnel
-    //#######################################################################################################################
-
-    public function action_inscription_pro()
-    {
 
 
-        $m = Model::get_model();
-
-        $pro = ['professionnel' => $m->get_inscription_pro($_POST)];
-
-        if ($pro) {
-            $message = ['message' => 'Inscription soumise a validation veuillez attendre 48 heures'];
-            $this->render('fiche_pro',$message);
-        }else{
-            $this->render('error');
-        }
-          
-    }
 
 }
