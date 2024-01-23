@@ -21,28 +21,29 @@ class Controller_acces extends Controller
 
     public function action_acces_inscription_valider()
     {
-        
+
         $m = Model::get_model();
 
-        $userData =['inscription'=> $m->get_inscription_valider($_POST)];
-    
+        $userData = ['inscription' => $m->get_inscription_valider($_POST)];
+
         if ($userData) {
             $this->render('ficheUsers', $userData);
         } else {
             $this->render('error');
         }
-        }
-        public function action_fiche_users() {
-            $animal = isset($_POST['typeAnimal']) ? $_POST['typeAnimal'] : null;
-            $m = Model::get_model();
-        
-            $data = ['confirmationMessage' => 'Les données ont été mises à jour avec succès.', 'raceanimaux' => $m->get_find_animal($animal)];
-        
-            ob_clean();
-            header('Content-Type: application/json');
-            echo json_encode($data);
-            exit();
-        }
+    }
+    public function action_fiche_users()
+    {
+        $animal = isset($_POST['typeAnimal']) ? $_POST['typeAnimal'] : null;
+        $m = Model::get_model();
+
+        $data = ['confirmationMessage' => 'Les données ont été mises à jour avec succès.', 'raceanimaux' => $m->get_find_animal($animal)];
+
+        ob_clean();
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit();
+    }
     //#######################################################################################################################
     //fonction connexion
     //#######################################################################################################################
@@ -60,17 +61,21 @@ class Controller_acces extends Controller
     //fonction inscription professionnel
     //#######################################################################################################################
 
-    public function action_inscription_pro(){
-     
+    public function action_inscription_pro()
+    {
+
 
         $m = Model::get_model();
 
-        $proData =['professionnel' => $m->get_inscription_pro($_POST)];
-    
-        if ($proData) {
-            $this->render('fiche_pro', $proData);
-        } else {
+        $pro = ['professionnel' => $m->get_inscription_pro($_POST)];
+
+        if ($pro) {
+            $message = ['message' => 'Inscription soumise a validation veuillez attendre 48 heures'];
+            $this->render('fiche_pro',$message);
+        }else{
             $this->render('error');
         }
+          
     }
+
 }

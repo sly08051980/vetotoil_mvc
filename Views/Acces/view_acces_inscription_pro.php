@@ -1,32 +1,27 @@
 <div class="container pt-5" id="inscriptionPro">
 
 
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="..." class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
             <div class="row">
                 <div class="col-12 justify-content-center py-5">
                     <h1 class="text-center">Inscription Pour les Professionnels</h1>
                 </div>
             </div>
+
             <div class="row justify-content-center">
                 <form class="col-lg-8" method="POST" action="?controller=acces&action=inscription_pro">
                     <div class="row">
+                    <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="./Content/img/userdefaut.png" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+      
+      </div>
+    </div>
+  </div>
+</div>
                         <!-- Colonnes de gauche -->
                         <div class="col-lg-5">
                             <div class="mb-3">

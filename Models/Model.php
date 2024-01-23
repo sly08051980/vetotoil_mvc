@@ -68,7 +68,7 @@ class Model
         }
     }
     //#######################################################################################################################
-    //fonction inscription
+    //fonction inscription particulier
     //#######################################################################################################################
     public function get_inscription_valider(array $data)
     {
@@ -77,14 +77,23 @@ class Model
 
 
             $nom = isset($_POST['nom']) ? $_POST['nom'] : "";
+            $nom=validate_formulaire($nom);
             $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : "";
+            $prenom=validate_formulaire($prenom);
             $adresse = isset($_POST['adresse']) ? $_POST['adresse'] : "";
+            $adresse =validate_formulaire($adresse);
             $complementAdresse = isset($_POST['complementAdresse']) ? $_POST['complementAdresse'] : "";
+            $complementAdresse = validate_formulaire($complementAdresse);
             $codePostal = isset($_POST['codePostal']) ? $_POST['codePostal'] : "";
+            $codePostal =validate_formulaire($codePostal);
             $ville = isset($_POST['ville']) ? $_POST['ville'] : "";
+            $ville =validate_formulaire($ville);
             $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : "";
+            $telephone =validate_formulaire($telephone);
             $password = isset($_POST['password']) ? $_POST['password'] : "";
+
             $email = isset($_POST['email']) ? $_POST['email'] : "";
+            $email =validate_formulaire($email);
 
             $date = date("Y-m-d");
             $requete = $this->bd->prepare('INSERT INTO patient (id_patient, nom, prenom, adresse, complement_adresse, code_postal, ville, telephone, mdp ,email, date_creation, date_fin) 
@@ -150,22 +159,36 @@ class Model
         }
         return $requete->fetchAll(PDO::FETCH_OBJ);
     }
-
+    //#######################################################################################################################
+    //fonction inscription pro
+    //#######################################################################################################################
     public function get_inscription_pro(array $data)
     {
         try {
             $siret = isset($_POST['siret']) ? $_POST['siret'] : "";
+            $siret =validate_formulaire($siret);
             $nomSociete = isset($_POST['nomSociete']) ? $_POST['nomSociete'] : "";
+            $nomSociete =validate_formulaire($nomSociete);
             $profession = isset($_POST['profession']) ? $_POST['profession'] : "";
+            $profession =validate_formulaire($profession);
             $nomDirigeant = isset($_POST['nomDirigeant']) ? $_POST['nomDirigeant'] : "";
+            $nomDirigeant =validate_formulaire($nomDirigeant);
             $adresse = isset($_POST['adresse']) ? $_POST['adresse'] : "";
+            $adresse =validate_formulaire($adresse);
             $complementAdresse = isset($_POST['complementAdresse']) ? $_POST['complementAdresse'] : "";
+            $complementAdresse =validate_formulaire($complementAdresse);
             $codePostal = isset($_POST['codePostal']) ? $_POST['codePostal'] : "";
+            $codePostal =validate_formulaire($codePostal);
             $ville = isset($_POST['ville']) ? $_POST['ville'] : "";
+            $ville =validate_formulaire($ville);
             $telephoneSociete = isset($_POST['telephoneSociete']) ? $_POST['telephoneSociete'] : "";
+            $telephoneSociete =validate_formulaire($telephoneSociete);
             $telephoneDirigeant = isset($_POST['telephoneDirigeant']) ? $_POST['telephoneDirigeant'] : "";
+            $telephoneDirigeant =validate_formulaire($telephoneDirigeant);
             $email = isset($_POST['email']) ? $_POST['email'] : "";
+            $email =validate_formulaire($email);
             $password = isset($_POST['password']) ? $_POST['password'] : "";
+
             $administrateur = "Admin";
 
             $dates = date("Y-m-d");
@@ -211,4 +234,29 @@ class Model
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
     }
+
+    //#######################################################################################################################
+    //fonction inscription pro
+    //#######################################################################################################################
+
+   public function get_recherche_pro($siret,$mdp){
+    
+    try{
+        
+        $requete=$this->bd->prepare('SELECT * FROM societe WHERE siret=:siret AND password=:mdp');
+        $requete->execute(array(':siret' => $siret, ':mdp' => $mdp ));
+    }catch (PDOException $e) {
+        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+    }
+
+   }
+   public function get_recherche_pro_valide($siret,$mdp){
+    try{
+        
+        $requete=$this->bd->prepare('SELECT * FROM societe WHERE siret=:siret AND password=:mdp AND status=:statut');
+        $requete->execute(array(':siret' => $siret, ':mdp' => $mdp,':status'=>"Valider" ));
+    }catch (PDOException $e) {
+        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+    }
+   }
 }

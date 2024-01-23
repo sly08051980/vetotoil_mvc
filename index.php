@@ -1,4 +1,5 @@
 
+
 <?php 
 
 
@@ -7,7 +8,7 @@
 require_once('Models/Model.php');
 require_once('Controllers/Controller.php');
 require_once('Utils/header.php');
-
+require_once('Utils/function_validation_text.php');
 
 
 $controllers=['home','acces','session'];
