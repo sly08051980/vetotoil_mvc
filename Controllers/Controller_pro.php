@@ -54,24 +54,26 @@ public function action_connexion_pro(){
       
       
         if($pro['connexionProfessionnel']){
-            var_dump($pro);
+            
             $dataPro = ['connexionProfessionnel' => $m->get_recherche_pro_valide($siret,$mdp)];
-            $this->render('test',$dataPro);
-        }else{
-            $topro = ['connexionProfessionnel' => 'Pas de Compte associé'];
-            $this->render('test',$topro);
-        }
-        // if($pro){
-        //     $dataPro = ['connexionProfessionnel' => $m->get_recherche_pro_valide($siret,$mdp)];
-        //     if($dataPro){
-        //         $this->render('test');
-        //     }else{
-        //         $message = ['message' => 'veuillez patienter des recherches sont toujours en cours'];
-        //         $this->render('fiche_pro',$message);
-                
-        //     }
-        // }
+            if (empty($dataPro['connexionProfessionnel'])) {
+                $dataProAdmin = ['connexionProfessionnel' => "en attente de validation"];
+                $this->render('validation_pro',$dataProAdmin);
+            } else {
+                // var_dump($dataPro['connexionProfessionnel']);
+               print_r($dataPro);
+                $this->render('session_pro_societe',$dataPro);
 
+            }
+           
+        }else{
+            $dataPro = ['connexionProfessionnel' => 'Pas de Compte associé'];
+            $this->render('validation_pro',$dataPro);
+        }
+
+    }
+    public function action_ajout_employer(){
+        $this->render('ajout_employer');
     }
 
 }

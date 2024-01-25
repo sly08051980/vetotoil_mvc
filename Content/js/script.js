@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //#################################################################################################
   let home = document.getElementById("home");
   if (home) {
+    
     //debut écriture vétérinaire toiletteur
     const choice = ["Vétérinaire", "Toiletteur"];
     let counter = 0;
@@ -144,4 +145,5 @@ document.addEventListener("DOMContentLoaded", function () {
     
     
   }
+  
 });

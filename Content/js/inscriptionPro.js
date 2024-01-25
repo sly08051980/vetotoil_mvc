@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let inscriptionPro=document.getElementById('inscriptionPro');
   if(inscriptionPro){
 
+
 //     const urlForToken = 'https://api.insee.fr/token';
 // const data = 'grant_type=client_credentials';
 // const authHeader = 'Basic ZnhoR3hnUkJyUDFvZ3ZjUWNNSmR0c0hYbXp3YTpWM2RhVTZ4ZFdTNTFJejRvVVVaZFRXak1wZlVh';
@@ -191,5 +192,19 @@ if (inputValue.length === 9) {
     element.style.color = '';
 }
 }
+}
+
+let ajoutEmployer = document.getElementById("ajout_employer");
+if (ajoutEmployer) {
+  console.log("ok");
+  //gestion de l affichage pour ajouter un employer
+
+  let btnAjoutEmployer = document.getElementById("btn_ajout_employer");
+
+
+  btnAjoutEmployer.addEventListener("click", function () {
+    document.getElementById("employer").classList.toggle("invisible"); //affiche la class invisible
+  
+  });
 }
 });
