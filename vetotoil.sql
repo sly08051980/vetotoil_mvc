@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 21 jan. 2024 à 18:15
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Généré le : ven. 26 jan. 2024 à 11:56
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,8 +34,11 @@ CREATE TABLE `ajouter` (
   `date_sortie_employer` date NOT NULL,
   `date_jours_vacances` date NOT NULL,
   `date_fin_vacances` date NOT NULL,
-  `siret` int(11) NOT NULL,
-  `id_employer` int(11) NOT NULL
+  `siret` varchar(14) NOT NULL,
+  `id_employer` int(11) NOT NULL,
+  `droit_utilisateur` varchar(10) DEFAULT NULL,
+  `debut_repas` time DEFAULT NULL,
+  `fin_repas` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -48,7 +51,6 @@ CREATE TABLE `animal` (
   `id_animal` int(11) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `date_naissance` date NOT NULL,
-  `id_type` int(11) NOT NULL,
   `id_race` int(11) NOT NULL,
   `id_patient` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -70,12 +72,8 @@ CREATE TABLE `employer` (
   `telephone` varchar(10) NOT NULL,
   `email` varchar(100) NOT NULL,
   `profession` varchar(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `date_creation` datetime NOT NULL,
-  `date_fin` datetime NOT NULL,
-  `droit_utilisateur` varchar(10) NOT NULL,
-  `debut_repas` time NOT NULL,
-  `fin_repas` time NOT NULL
+  `password` varchar(255) NOT NULL,
+  `date_creation` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -93,7 +91,7 @@ CREATE TABLE `patient` (
   `code_postal` varchar(5) NOT NULL,
   `ville` varchar(50) NOT NULL,
   `telephone` varchar(10) NOT NULL,
-  `mdp` varchar(50) NOT NULL,
+  `mdp` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `date_creation` date NOT NULL,
   `date_fin` date DEFAULT NULL
@@ -107,59 +105,11 @@ INSERT INTO `patient` (`id_patient`, `nom`, `prenom`, `adresse`, `complement_adr
 (107, 'regnier', 'sylvain', 'AVENUE DU MARECHAL NEY, BÂT C6BÂT C6', '', '13011', 'MARSEILLE', '0620941745', '1234', 'regnier.lena44@yahoo.fr', '2024-01-21', NULL),
 (108, 'regnier', 'sylvain', 'AVENUE DU MARECHAL NEY, BÂT C6BÂT C6', '', '13011', 'MARSEILLE', '0620941745', '1234', 'regnier.lena44@yahoo.fr', '2024-01-21', NULL),
 (109, 'regnier', 'sylvain', 'AVENUE DU MARECHAL NEY, BÂT C6BÂT C6', '', '13011', 'MARSEILLE', '0620941745', '1234', 'regnier.lena44@yahoo.fr', '2024-01-21', NULL),
-(110, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(111, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(112, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(113, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(114, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(115, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(116, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(117, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(118, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(119, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(120, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(121, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(122, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(123, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(124, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(125, 'dfcg', 'sdfh', '7 Rue Judaïque', '', '33000', 'Bordeaux', '0101010101', '1234', 'reg@gmail.com', '2024-01-21', NULL),
-(126, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(127, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(128, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(129, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(130, 'dfcg', 'sdfh', '7 Rue Judaique', '', '33410', 'Rions', '0101010101', '1234', 'reg@gmail.com', '2024-01-21', NULL),
-(131, 'dfh', 'fgh', '3 rue', '', '45470', 'Loury', '0102030405', '123', 'cfgh@c.com', '2024-01-21', NULL),
-(132, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(133, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(134, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(135, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(136, 'dtg', 'cfgbj', '5 Rue Judaïque', '', '33000', 'Bordeaux', '0101010101', '123', 'reg@gmail.com', '2024-01-21', NULL),
-(137, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(138, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(139, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(140, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(141, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(142, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(143, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(144, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(145, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(146, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(147, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(148, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(149, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(150, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(151, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(152, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(153, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(154, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(155, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(156, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(157, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(158, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(159, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(160, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(161, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL),
-(162, '', '', '', '', '', '', '', '', '', '2024-01-21', NULL);
+(211, 'thierry', 'thierry', '6 rue judaïque', '', '33000', 'bordeaux', '0101010101', '1234', 'thierry.leng@gmail.com', '2024-01-23', NULL),
+(212, '@toto', ':tata', 'zerzea', '', 'azer', 'azerez', '0101010101', '1234', 'toto@gmail.com', '2024-01-23', NULL),
+(213, '@//////////¨¨  popo', '@//////////¨¨  popo', 'zerzea', '', 'azer', 'azerez', '0101010101', '1234', 'popo@gmail.com', '2024-01-23', NULL),
+(214, '&amp;#039;/&amp;#039;&amp;quot;&amp;quot; &amp;lt;', '&amp;#039;/&amp;#039;&amp;quot;&amp;quot; &amp;lt;', 'rue l&rsquo;herminot', '', '77550', 'moissy-cramayel', '0101010101', '1234', 'dfyghij@gmail.com', '2024-01-23', NULL),
+(215, '&lt;/script&gt;', '&lt;/script&gt;', 'rue l’herminot', '', '77550', 'moissy-cramayel', '0101010101', '1234', 'script@gmail.com', '2024-01-23', NULL);
 
 -- --------------------------------------------------------
 
@@ -747,7 +697,8 @@ CREATE TABLE `rdv` (
   `date_rdv` date NOT NULL,
   `status` varchar(20) NOT NULL,
   `id_employer` int(11) NOT NULL,
-  `id_patient` int(11) NOT NULL
+  `id_patient` int(11) NOT NULL,
+  `siret` varchar(14) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -757,7 +708,7 @@ CREATE TABLE `rdv` (
 --
 
 CREATE TABLE `societe` (
-  `siret` int(11) NOT NULL,
+  `siret` varchar(14) NOT NULL,
   `nom_societe` varchar(50) NOT NULL,
   `profession` varchar(20) NOT NULL,
   `nom_dirigeant` varchar(50) NOT NULL,
@@ -768,11 +719,11 @@ CREATE TABLE `societe` (
   `telephone_societe` varchar(10) NOT NULL,
   `telephone_dirigeant` varchar(10) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `date_creation` datetime NOT NULL,
-  `date_resiliation` datetime NOT NULL,
-  `date_validation` datetime NOT NULL,
-  `status` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `date_creation` date NOT NULL,
+  `date_resiliation` date DEFAULT NULL,
+  `date_validation` datetime DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
   `droit_utilisateur` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -781,7 +732,13 @@ CREATE TABLE `societe` (
 --
 
 INSERT INTO `societe` (`siret`, `nom_societe`, `profession`, `nom_dirigeant`, `adresse`, `complement_adresse`, `code_postal`, `ville`, `telephone_societe`, `telephone_dirigeant`, `email`, `password`, `date_creation`, `date_resiliation`, `date_validation`, `status`, `droit_utilisateur`) VALUES
-(0, 'toto', 'veterinaire', '', '5 rue leclec', '', '13012', 'marseille', '0606060606', '0101010101', 'toto@gmail.com', '123456', '2024-01-03 15:41:15', '0000-00-00 00:00:00', '2024-01-03 15:41:15', '', '');
+('', '', '', '', '', '', '', '', '', '', '', '', '2024-01-23', NULL, NULL, NULL, 'Admin'),
+('11111111111111', 'tata', 'Vétérinaire', 'SYLVAIN REGNIER', 'ZERZEA', 'tata', '12011', 'AZEREZ', '0101010101', '0202020202', 'regnier.sylvain@yahoo.fr', '', '2024-01-22', NULL, NULL, NULL, 'Admin'),
+('12341564897897', 'toto', 'vétérinaire', 'sylvain regnier', 'zerzea', '', '13011', 'azerez', '0101010101', '0202020202', 'regnier.sylvain@yahoo.fr', '1234', '2024-01-23', NULL, NULL, 'Valider', 'Admin'),
+('33333333333333', 'gfdgd', 'vétérinaire', 'sylvain regnier', 'zerzea', '', '13011', 'azerez', '0101010101', '0202020202', 'thierry.leng@gmail.com', '1234', '2024-01-23', NULL, NULL, NULL, 'Admin'),
+('55555555555555', 'toto', 'vétérinaire', 'sylvain regnier', 'zerzea', '', '13011', 'tr', '0101010101', '0202020202', 'popo@gmail.com', '1234', '2024-01-23', NULL, NULL, NULL, 'Admin'),
+('88888888888888', 'toto', 'vétérinaire', 'toto', '6 rue du general leclec', '', '13011', 'paris', '0101010101', '0101010101', 'srrdtfygh@gmail.com', '1234', '2024-01-23', NULL, NULL, NULL, 'Admin'),
+('99999999999999', 'toto', 'vétérinaire', 'sylvain regnier', 'zerzea', '', '13011', 'azerez', '0101010101', '0202020202', 'toto@gmail.com', '1234', '2024-01-23', NULL, NULL, NULL, 'Admin');
 
 -- --------------------------------------------------------
 
@@ -839,7 +796,6 @@ ALTER TABLE `animal`
   ADD PRIMARY KEY (`id_animal`),
   ADD KEY `date_naissance` (`date_naissance`),
   ADD KEY `id_patient` (`id_patient`),
-  ADD KEY `id_type` (`id_type`) USING BTREE,
   ADD KEY `id_race` (`id_race`) USING BTREE;
 
 --
@@ -868,7 +824,8 @@ ALTER TABLE `race`
 ALTER TABLE `rdv`
   ADD PRIMARY KEY (`id_rdv`),
   ADD KEY `id_employer` (`id_employer`),
-  ADD KEY `id_patient` (`id_patient`);
+  ADD KEY `id_patient` (`id_patient`),
+  ADD KEY `siret` (`siret`);
 
 --
 -- Index pour la table `societe`
@@ -926,7 +883,7 @@ ALTER TABLE `employer`
 -- AUTO_INCREMENT pour la table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id_patient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id_patient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 
 --
 -- AUTO_INCREMENT pour la table `race`
@@ -960,16 +917,15 @@ ALTER TABLE `type`
 -- Contraintes pour la table `ajouter`
 --
 ALTER TABLE `ajouter`
-  ADD CONSTRAINT `ajouter_ibfk_1` FOREIGN KEY (`siret`) REFERENCES `societe` (`siret`),
-  ADD CONSTRAINT `ajouter_ibfk_2` FOREIGN KEY (`id_employer`) REFERENCES `employer` (`id_employer`);
+  ADD CONSTRAINT `ajouter_ibfk_2` FOREIGN KEY (`id_employer`) REFERENCES `employer` (`id_employer`),
+  ADD CONSTRAINT `ajouter_ibfk_3` FOREIGN KEY (`siret`) REFERENCES `societe` (`siret`);
 
 --
 -- Contraintes pour la table `animal`
 --
 ALTER TABLE `animal`
   ADD CONSTRAINT `animal_ibfk_1` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id_patient`),
-  ADD CONSTRAINT `animal_ibfk_2` FOREIGN KEY (`id_type`) REFERENCES `type` (`id_type`),
-  ADD CONSTRAINT `animal_ibfk_3` FOREIGN KEY (`id_race`) REFERENCES `race` (`id_race`);
+  ADD CONSTRAINT `animal_ibfk_2` FOREIGN KEY (`id_race`) REFERENCES `race` (`id_race`);
 
 --
 -- Contraintes pour la table `employer`
@@ -988,7 +944,8 @@ ALTER TABLE `race`
 --
 ALTER TABLE `rdv`
   ADD CONSTRAINT `rdv_ibfk_1` FOREIGN KEY (`id_employer`) REFERENCES `employer` (`id_employer`),
-  ADD CONSTRAINT `rdv_ibfk_2` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id_patient`);
+  ADD CONSTRAINT `rdv_ibfk_2` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id_patient`),
+  ADD CONSTRAINT `rdv_ibfk_3` FOREIGN KEY (`siret`) REFERENCES `societe` (`siret`);
 
 --
 -- Contraintes pour la table `soigner`

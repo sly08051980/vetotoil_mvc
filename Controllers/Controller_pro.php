@@ -76,4 +76,15 @@ public function action_connexion_pro(){
         $this->render('ajout_employer');
     }
 
+    //#######################################################################################################################
+    //fonction inscription employer
+    //#######################################################################################################################
+
+    public function action_enregistrement_employer(){
+     
+        $m = Model::get_model();
+        $pro = ['connexionProfessionnel' => $m->get_enregistrement_employer($_POST)];
+        $this->render('ajout_employer');
+    }
+
 }

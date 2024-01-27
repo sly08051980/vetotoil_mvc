@@ -236,7 +236,7 @@ class Model
     }
 
     //#######################################################################################################################
-    //fonction inscription pro
+    //fonction Connexion pro
     //#######################################################################################################################
 
    public function get_recherche_pro($siret,$mdp){
@@ -261,4 +261,94 @@ class Model
     }
     return $requete->fetchAll(PDO::FETCH_OBJ);
    }
+
+    //#######################################################################################################################
+    //fonction employer
+    //#######################################################################################################################
+    public function get_enregistrement_employer(array $data)
+    {
+        try {
+
+         
+            $nom = $_POST['nom'];
+            $prenom = $_POST['prenom'];
+            $adresse = $_POST['adresse'];
+            $complementAdresse = $_POST['complementAdresse'];
+            $codePostal = $_POST['codePostal'];
+            $ville = $_POST['ville'];
+            $telephone = $_POST['telephone'];
+            $email = $_POST['email'];
+            $profession = $_POST['profession'];
+            $password = $_POST['password'];
+            $dates = date("Y-m-d");
+    
+            $requete = $this->bd->prepare("INSERT INTO employer (id_employer, nom, prenom, adresse, complement_adresse, code_postal,
+             ville, telephone, email, profession, password, date_creation) 
+             VALUES (NULL, :nom, :prenom, :adresse, :complementAdresse, :codePostal, :ville, :telephone, :email, :profession,
+             :password, :dates)");
+    
+            $requete->execute([
+                ':nom' => $nom,
+                ':prenom' => $prenom,
+                ':adresse' => $adresse,
+                ':complementAdresse' => $complementAdresse,
+                ':codePostal' => $codePostal,
+                ':ville' => $ville,
+                ':telephone' => $telephone,
+                ':email' => $email,
+                ':profession' => $profession,
+                ':password' => $password,
+                ':dates' => $dates
+            ]);
+
+            $requete=$this->bd->prepare("SELECT id_employer FROM employer WHERE email = :email AND password=:password");
+            $requete->execute(array(':email' => $email, ':password' => $password));
+
+          $resultat=  $requete->fetch(PDO::FETCH_OBJ);
+
+            $test =[];
+            if (isset($_POST['lundi']) && $_POST['lundi'] === 'on') {
+                $test[] = 'lundi';
+            }
+            
+            if (isset($_POST['mardi']) && $_POST['mardi'] === 'on') {
+                $test[] = 'mardi';
+            }
+            if (isset($_POST['mercredi']) && $_POST['mercredi'] === 'on') {
+                $test[] = 'mercredi';
+            }
+            if (isset($_POST['jeudi']) && $_POST['jeudi'] === 'on') {
+                $test[] = 'jeudi';
+            }
+            if (isset($_POST['vendredi']) && $_POST['vendredi'] === 'on') {
+                $test[] = 'vendredi';
+            }
+            if (isset($_POST['samedi']) && $_POST['samedi'] === 'on') {
+                $test[] = 'samedi';
+            }
+            if (isset($_POST['dimanche']) && $_POST['dimanche'] === 'on') {
+                $test[] = 'dimanche';
+            }
+            $jours=json_encode($test);
+            $siret = $_POST['siret'];
+
+            $requete=$this->bd->prepare("INSERT INTO ajouter(id_ajouter_configuration, jours_travailler, date_entree_employer,
+             date_sortie_employer, date_jours_vacances, date_fin_vacances, siret, id_employer, droit_utilisateur, 
+             debut_repas, fin_repas) VALUES (NULL,:jours,:dates,NULL,NULL,NULL,
+             :siret,:resultat,Null,Null,NULL)");
+
+$requete->execute([
+    ':jours' => $jours,
+    ':dates' => $dates,
+    ':siret' => $siret,
+    ':resultat' => $resultat->id_employer 
+]);
+    
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+    
+        return $requete->fetchAll(PDO::FETCH_OBJ);
+    }
+    
 }
