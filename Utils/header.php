@@ -29,66 +29,71 @@
 
   <header>
     <?php session_start(); ?>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbar">
-
-      <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbar">
+    <div class="container-fluid">
         <div class="d-flex align-items-center">
-          <img src="./Content/img/logo.png" alt="logo-vetotoil" height="30px" width="30px" class="me-3">
-          <a class="navbar-brand" href="#">VETOTOIL</a>
+            <img src="./Content/img/logo.png" alt="logo-vetotoil" height="30px" width="30px" class="me-3">
+            <a class="navbar-brand" href="#">VETOTOIL</a>
         </div>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll mx-auto" style="--bs-scroll-height: 100px;">
-            <li class='nav-item'>
-              <a class='nav-link active' aria-current='page' href="?controller=home&action=home">-Accueil-</a>
-            <li class='nav-item'>
-              <a class='nav-link active' aria-current='page' href="?controller=acces&action=acces_connexion">-Connexion-</a>
-            <li class='nav-item'>
-              <a class='nav-link active' aria-current='page' href="?controller=acces&action=acces_inscription">-Inscription-</a>
 
-            <li class='nav-item'>
-              <a class='nav-link active' aria-current='page' href='?controller=home&action=contact'>-Contact-</a>
+        
+        <?php
+            if (!isset($_SESSION["droit_utilisateur"])){
+              ?>
+              <div class="collapse navbar-collapse" id="navbarScroll">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-auto">
+                  <li class='nav-item'>
+                      <a class='nav-link active' aria-current='page' href="?controller=home&action=home">-Accueil-</a>
+                  </li>
+                  <li class='nav-item'>
+                      <a class='nav-link active' aria-current='page' href="?controller=acces&action=acces_connexion">-Connexion-</a>
+                  </li>
+                  <li class='nav-item'>
+                      <a class='nav-link active' aria-current='page' href="?controller=acces&action=acces_inscription">-Inscription-</a>
+                  </li>
+                  <li class='nav-item'>
+                      <a class='nav-link active' aria-current='page' href='?controller=home&action=contact'>-Contact-</a>
+                  </li>
+              </ul>
+              <ul class='navbar-nav mb-2 mb-lg-0'>
+                    <li class="nav-item">
+                        <a href="?controller=acces&action=acces_connexion">
+                            <img src="./Content/img/connexion1.png" class="img-fluid" alt="vetotoil connexion">
+                        </a>
+                    </li>
+                </ul>
+              <?php
+            }
+            ?>
+     
 
-          </ul>
 
+            <?php
+            if (isset($_SESSION["droit_utilisateur"])){
+              if  ($_SESSION["droit_utilisateur"]=='Admin'){
+                include "header_admin.php";
+                }else if($_SESSION["droit_utilisateur"]=='Employer'){
+                  include "header_employer.php";
+                }else if($_SESSION["droit_utilisateur"]=='Patient'){
+                  include "header_patient.php";
+                }else{
+                  
+                }
+            }
+          
+            ?>
 
-
+           
+              
+          
         </div>
+    </div>
+</nav>
 
-        <?php if (isset($_SESSION['nom'])) {
-          echo '<div>';
-          echo "<ul class='navbar-nav  my-2 my-lg-0 navbar-nav-scroll justify-content-end' style='--bs-scroll-height: 100px;'>";
-          echo "<li class='nav-item'>";
-          echo "<a class='nav-link active' aria-current='page' href='?controller=home&action=contact'>Bienvenue " . $_SESSION['nom'] . " " . $_SESSION['prenom'] . "</a>";
-          echo "</ul>";
-
-
-          echo '<div class="nav-item">';
-          echo '<div class="d-flex ">';
-          echo '</div>';
-          echo '<div>';
-          echo '<a href ="?controller=session&action=session_deconnexion">
-                 <img src="./Content/img/deconnexion.png" class="img-fluid" alt="vetotoil deconnexion"
-                    style="width:15%"></a>';
-          echo '</div>';
-          echo '</div>';
-        } else {
-          echo '<div class="nav-item">';
-          echo '<div class="d-flex  justify-content-end">';
-
-          echo '<a href ="?controller=acces&action=acces_connexion">
-                 <img src="./Content/img/connexion.png" class="img-fluid" alt="vetotoil deconnexion"
-                    style="width:15%"></a>';
-          echo '</div>';
-          echo '</div>';
-          echo '</div>';
-        }
-
-        ?>
-
-    </nav>
   </header>
   <div class="espacemain"></div>
 
