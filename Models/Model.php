@@ -350,5 +350,17 @@ $requete->execute([
     
         return $requete->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function get_home_pro($siret){
+        try{
+      
+        $requete=$this->bd->prepare("SELECT * FROM societe WHERE siret =:siret");
+        $requete->execute(array(':siret' => $siret));
+    }catch (PDOException $e) {
+        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+    }
+
+    return $requete->fetchAll(PDO::FETCH_OBJ);
+    }
     
 }

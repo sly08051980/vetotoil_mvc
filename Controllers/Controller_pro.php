@@ -86,5 +86,22 @@ public function action_connexion_pro(){
         $pro = ['connexionProfessionnel' => $m->get_enregistrement_employer($_POST)];
         $this->render('ajout_employer');
     }
+    //#######################################################################################################################
+    //fonction gestion pro
+    //#######################################################################################################################
+    public function action_home_pro(){
+        $siret=$_POST['siret'];     
+        $m = Model::get_model();
+        $pro = ['homePro' => $m->get_home_pro($siret)];
+        $this->render('home_pro',$pro);
+
+    }
+    public function action_modifier_pro(){
+ 
+        $this->render('modifier_professionnel');
+
+    }
+
+
 
 }
