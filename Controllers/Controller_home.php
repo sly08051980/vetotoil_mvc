@@ -23,4 +23,10 @@ class Controller_home extends Controller
     {
         $this->render('contact');
     }
+
+    public function action_politique_confidentialite_image()
+    {
+        $this->render('condition_general_utilisation_image');
+    }
+    
 }

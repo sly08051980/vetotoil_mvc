@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //#################################################################################################
   //page inscription_pro
   //#################################################################################################
-
+  console.log("script charger dom");
   let inscriptionPro = document.getElementById("inscriptionPro");
   if (inscriptionPro) {
     //     const urlForToken = 'https://api.insee.fr/token';
@@ -219,7 +219,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-
+let image=document.getElementById('image');
+if (image.value==""){
+  console.log("image")
+}
 
 });
 

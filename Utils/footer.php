@@ -33,6 +33,8 @@
                         <a class='nav-link active' aria-current='page' href="?controller=home&action=politique_confidentialite">Politique de Confidentialité</a>
                     <li class='nav-item'>
                         <a class='nav-link active' aria-current='page' href="?controller=home&action=rgpd">RGPD</a>
+                        <li class='nav-item'>
+                        <a class='nav-link active' aria-current='page' href="?controller=home&action=politique_confidentialite_image">Politique de Confidentialité Image</a>
                 </ul>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">

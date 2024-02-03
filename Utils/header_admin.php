@@ -5,7 +5,7 @@
 <div class="collapse navbar-collapse" id="navbarScroll">
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-auto">
         <li class='nav-item'>
-        <form method="POST" action="?controller=pro&action=home_pro">
+        <form method="POST" action="?controller=pro&action=modifier_pro">
                 <input type="hidden" name="siret" value="<?= $_SESSION['siret'] ?>">
                 <input type="submit" class="bg-transparent border-0 pt-2" id="envoyerSiret" value="Accueil">
             </form>
@@ -31,8 +31,11 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Société
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Modifier</a></li>
+            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                <form method="POST" action="?controller=pro&action=modifier_pro">
+                <input type="hidden" name="siret" value="<?= $_SESSION['siret'] ?>">
+                <input type="submit" class="bg-transparent border-0 ms-3" id="envoyerSiret" value="Modifier">
+            </form>
                 <li>
                     <hr class="dropdown-divider">
                 </li>

@@ -9,8 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
       btnModifier.addEventListener("click", function () {
           if (btnModifier.value == "modifier") {
               console.log("click");
-              btnModifier.value = "envoyer";
-              btnModifier.textContent = "Envoyer";
+                btnModifier.style.display="none";
+           document.getElementById('envoyerFormulaire').className="d-block btn btn-custom rounded-pill";
+          
               Array.from(modifierInputs).forEach(function (input) {
                   modifier(input);
               });
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function modifier(input) {
+    //fonction pour afficher les inputs
       input.removeAttribute('readonly');
       input.classList.remove("border-0");
   }

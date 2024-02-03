@@ -77,23 +77,23 @@ class Model
 
 
             $nom = isset($_POST['nom']) ? $_POST['nom'] : "";
-            $nom=validate_formulaire($nom);
+            $nom = validate_formulaire($nom);
             $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : "";
-            $prenom=validate_formulaire($prenom);
+            $prenom = validate_formulaire($prenom);
             $adresse = isset($_POST['adresse']) ? $_POST['adresse'] : "";
-            $adresse =validate_formulaire($adresse);
+            $adresse = validate_formulaire($adresse);
             $complementAdresse = isset($_POST['complementAdresse']) ? $_POST['complementAdresse'] : "";
             $complementAdresse = validate_formulaire($complementAdresse);
             $codePostal = isset($_POST['codePostal']) ? $_POST['codePostal'] : "";
-            $codePostal =validate_formulaire($codePostal);
+            $codePostal = validate_formulaire($codePostal);
             $ville = isset($_POST['ville']) ? $_POST['ville'] : "";
-            $ville =validate_formulaire($ville);
+            $ville = validate_formulaire($ville);
             $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : "";
-            $telephone =validate_formulaire($telephone);
+            $telephone = validate_formulaire($telephone);
             $password = isset($_POST['password']) ? $_POST['password'] : "";
 
             $email = isset($_POST['email']) ? $_POST['email'] : "";
-            $email =validate_formulaire($email);
+            $email = validate_formulaire($email);
 
             $date = date("Y-m-d");
             $requete = $this->bd->prepare('INSERT INTO patient (id_patient, nom, prenom, adresse, complement_adresse, code_postal, ville, telephone, mdp ,email, date_creation, date_fin) 
@@ -166,36 +166,41 @@ class Model
     {
         try {
             $siret = isset($_POST['siret']) ? $_POST['siret'] : "";
-            $siret =validate_formulaire($siret);
+            $siret = validate_formulaire($siret);
             $nomSociete = isset($_POST['nomSociete']) ? $_POST['nomSociete'] : "";
-            $nomSociete =validate_formulaire($nomSociete);
+            $nomSociete = validate_formulaire($nomSociete);
             $profession = isset($_POST['profession']) ? $_POST['profession'] : "";
-            $profession =validate_formulaire($profession);
+            $profession = validate_formulaire($profession);
             $nomDirigeant = isset($_POST['nomDirigeant']) ? $_POST['nomDirigeant'] : "";
-            $nomDirigeant =validate_formulaire($nomDirigeant);
+            $nomDirigeant = validate_formulaire($nomDirigeant);
             $adresse = isset($_POST['adresse']) ? $_POST['adresse'] : "";
-            $adresse =validate_formulaire($adresse);
+            $adresse = validate_formulaire($adresse);
             $complementAdresse = isset($_POST['complementAdresse']) ? $_POST['complementAdresse'] : "";
-            $complementAdresse =validate_formulaire($complementAdresse);
+            $complementAdresse = validate_formulaire($complementAdresse);
             $codePostal = isset($_POST['codePostal']) ? $_POST['codePostal'] : "";
-            $codePostal =validate_formulaire($codePostal);
+            $codePostal = validate_formulaire($codePostal);
             $ville = isset($_POST['ville']) ? $_POST['ville'] : "";
-            $ville =validate_formulaire($ville);
+            $ville = validate_formulaire($ville);
             $telephoneSociete = isset($_POST['telephoneSociete']) ? $_POST['telephoneSociete'] : "";
-            $telephoneSociete =validate_formulaire($telephoneSociete);
+            $telephoneSociete = validate_formulaire($telephoneSociete);
             $telephoneDirigeant = isset($_POST['telephoneDirigeant']) ? $_POST['telephoneDirigeant'] : "";
-            $telephoneDirigeant =validate_formulaire($telephoneDirigeant);
+            $telephoneDirigeant = validate_formulaire($telephoneDirigeant);
             $email = isset($_POST['email']) ? $_POST['email'] : "";
-            $email =validate_formulaire($email);
+            $email = validate_formulaire($email);
             $password = isset($_POST['password']) ? $_POST['password'] : "";
-
+            $file = isset($_POST['image']) ? $_POST['image'] : "";
+            var_dump($file);
+            $file1= inserer_image($file);
+            var_dump($file1);
+            $fileImage ="./upload/".$file1;
+die;
             $administrateur = "Admin";
 
             $dates = date("Y-m-d");
             $requete = $this->bd->prepare('INSERT INTO societe (siret, nom_societe, profession, nom_dirigeant, adresse, complement_adresse, 
-            code_postal, ville, telephone_societe ,telephone_dirigeant,email,password,date_creation,date_resiliation,date_validation,status,droit_utilisateur) 
+            code_postal, ville, telephone_societe ,telephone_dirigeant,email,password,images,date_creation,date_resiliation,date_validation,status,droit_utilisateur) 
              VALUES (:siret, :nomSociete, :profession, :nomDirigeant, :adresse, :complementAdresse, :codePostal, :ville, :telephoneSociete, 
-             :telephoneDirigeant, :email,:passw,:dates,NULL,NULL,NULL,:administrateur)');
+             :telephoneDirigeant, :email,:passw,:images,:dates,NULL,NULL,NULL,:administrateur)');
 
 
             $requete->execute([
@@ -211,10 +216,11 @@ class Model
                 ':telephoneDirigeant' => $telephoneDirigeant,
                 ':email' => $email,
                 ':passw' => $password,
+                'images' =>$fileImage,
                 ':dates' => $dates,
                 ':administrateur' => $administrateur
             ]);
-  
+
             return [
                 'siret' => $siret,
                 'nomSociete' => $nomSociete,
@@ -227,10 +233,11 @@ class Model
                 'telephoneSociete' => $telephoneSociete,
                 'telephoneDirigeant' => $telephoneDirigeant,
                 'email' => $email,
+                'images'=>$fileImage,
                 'administrateur' => $administrateur
 
             ];
-        }  catch (PDOException $e) {
+        } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
     }
@@ -239,28 +246,30 @@ class Model
     //fonction Connexion pro
     //#######################################################################################################################
 
-   public function get_recherche_pro($siret,$mdp){
-    
-    try{
-        
-        $requete=$this->bd->prepare('SELECT * FROM societe WHERE siret=:siret AND password=:mdp');
-        $requete->execute(array(':siret' => $siret, ':mdp' => $mdp ));
-    }catch (PDOException $e) {
-        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
-    }
-    return $requete->fetchAll(PDO::FETCH_OBJ);
+    public function get_recherche_pro($siret, $mdp)
+    {
 
-   }
-   public function get_recherche_pro_valide($siret,$mdp){
-    try{
-        $status="Valider";
-        $requete=$this->bd->prepare('SELECT * FROM societe WHERE siret=:siret AND password=:mdp AND status=:status');
-        $requete->execute(array(':siret' => $siret, ':mdp' => $mdp,':status'=>$status ));
-    }catch (PDOException $e) {
-        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        try {
+
+            $requete = $this->bd->prepare('SELECT * FROM societe WHERE siret=:siret AND password=:mdp');
+            $requete->execute(array(':siret' => $siret, ':mdp' => $mdp));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+        return $requete->fetchAll(PDO::FETCH_OBJ);
+
     }
-    return $requete->fetchAll(PDO::FETCH_OBJ);
-   }
+    public function get_recherche_pro_valide($siret, $mdp)
+    {
+        try {
+            $status = "Valider";
+            $requete = $this->bd->prepare('SELECT * FROM societe WHERE siret=:siret AND password=:mdp AND status=:status');
+            $requete->execute(array(':siret' => $siret, ':mdp' => $mdp, ':status' => $status));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+        return $requete->fetchAll(PDO::FETCH_OBJ);
+    }
 
     //#######################################################################################################################
     //fonction employer
@@ -269,7 +278,7 @@ class Model
     {
         try {
 
-         
+
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $adresse = $_POST['adresse'];
@@ -281,12 +290,12 @@ class Model
             $profession = $_POST['profession'];
             $password = $_POST['password'];
             $dates = date("Y-m-d");
-    
+
             $requete = $this->bd->prepare("INSERT INTO employer (id_employer, nom, prenom, adresse, complement_adresse, code_postal,
              ville, telephone, email, profession, password, date_creation) 
              VALUES (NULL, :nom, :prenom, :adresse, :complementAdresse, :codePostal, :ville, :telephone, :email, :profession,
              :password, :dates)");
-    
+
             $requete->execute([
                 ':nom' => $nom,
                 ':prenom' => $prenom,
@@ -301,16 +310,16 @@ class Model
                 ':dates' => $dates
             ]);
 
-            $requete=$this->bd->prepare("SELECT id_employer FROM employer WHERE email = :email AND password=:password");
+            $requete = $this->bd->prepare("SELECT id_employer FROM employer WHERE email = :email AND password=:password");
             $requete->execute(array(':email' => $email, ':password' => $password));
 
-          $resultat=  $requete->fetch(PDO::FETCH_OBJ);
+            $resultat = $requete->fetch(PDO::FETCH_OBJ);
 
-            $test =[];
+            $test = [];
             if (isset($_POST['lundi']) && $_POST['lundi'] === 'on') {
                 $test[] = 'lundi';
             }
-            
+
             if (isset($_POST['mardi']) && $_POST['mardi'] === 'on') {
                 $test[] = 'mardi';
             }
@@ -329,38 +338,83 @@ class Model
             if (isset($_POST['dimanche']) && $_POST['dimanche'] === 'on') {
                 $test[] = 'dimanche';
             }
-            $jours=json_encode($test);
+            $jours = json_encode($test);
             $siret = $_POST['siret'];
 
-            $requete=$this->bd->prepare("INSERT INTO ajouter(id_ajouter_configuration, jours_travailler, date_entree_employer,
+            $requete = $this->bd->prepare("INSERT INTO ajouter(id_ajouter_configuration, jours_travailler, date_entree_employer,
              date_sortie_employer, date_jours_vacances, date_fin_vacances, siret, id_employer, droit_utilisateur, 
              debut_repas, fin_repas) VALUES (NULL,:jours,:dates,NULL,NULL,NULL,
              :siret,:resultat,Null,Null,NULL)");
 
-$requete->execute([
-    ':jours' => $jours,
-    ':dates' => $dates,
-    ':siret' => $siret,
-    ':resultat' => $resultat->id_employer 
-]);
-    
+            $requete->execute([
+                ':jours' => $jours,
+                ':dates' => $dates,
+                ':siret' => $siret,
+                ':resultat' => $resultat->id_employer
+            ]);
+
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
-    
+
         return $requete->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function get_home_pro($siret){
-        try{
-      
-        $requete=$this->bd->prepare("SELECT * FROM societe WHERE siret =:siret");
-        $requete->execute(array(':siret' => $siret));
-    }catch (PDOException $e) {
-        die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+    public function get_modifier_pro($siret)
+    {
+        try {
+
+            $requete = $this->bd->prepare("SELECT * FROM societe WHERE siret =:siret");
+            $requete->execute(array(':siret' => $siret));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+
+        return $requete->fetchAll(PDO::FETCH_OBJ);
     }
 
-    return $requete->fetchAll(PDO::FETCH_OBJ);
+    public function get_update_societe(array $data)
+    {
+
+        try {
+
+
+            $siret = $_POST['siret'];
+            $nomDirigeant = $_POST['nomDirigeant'];
+            $profession = $_POST['profession'];
+            $adresse = $_POST['adresse'];
+            $complementAdresse = $_POST['complementAdresse'];
+            $codePostal = $_POST['codePostal'];
+            $ville = $_POST['ville'];
+            $telephoneSociete = $_POST['telephoneSociete'];
+            $telephoneDirigeant = $_POST['telephoneDirigeant'];
+            $email = $_POST['email'];
+
+            $requete = $this->bd->prepare("
+            UPDATE societe SET  profession = :profession, nom_dirigeant = :nomDirigeant, adresse = :adresse, complement_adresse = :complementAdresse,
+             code_postal = :codePostal, ville = :ville, telephone_societe = :telephoneSociete, telephone_dirigeant = :telephoneDirigeant, email = :email 
+             WHERE societe.siret = :siret;");
+
+
+            
+            $requete->execute([
+                ':siret' => $siret,
+                ':nomDirigeant' => $nomDirigeant,
+                ':profession' => $profession,
+                ':adresse' => $adresse,
+                ':complementAdresse' => $complementAdresse,
+                ':codePostal' => $codePostal,
+                ':ville' => $ville,
+                ':telephoneSociete' => $telephoneSociete,
+                ':telephoneDirigeant' => $telephoneDirigeant,
+                ':email' => $email
+
+
+            ]);
+
+        }   catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+        return $requete->fetchAll(PDO::FETCH_OBJ);
     }
-    
 }
