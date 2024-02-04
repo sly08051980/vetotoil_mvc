@@ -101,11 +101,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     race.addEventListener("input", function () {
-      const searchTerm = race.value.toLowerCase();
+      const raceChien = race.value.toLowerCase();
 
       // recherche les resultat en fonction de ce qui est taper
       const resultat = raceanimaux.filter((obj) =>
-        obj.race_animal.toLowerCase().includes(searchTerm)
+        obj.race_animal.toLowerCase().includes(raceChien)
       );
 
       afficheResultat(resultat);
