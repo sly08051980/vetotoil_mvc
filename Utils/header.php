@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -28,7 +29,7 @@
 
 
   <header>
-    <?php session_start(); ?>
+   
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbar">
     <div class="container-fluid">
         <div class="d-flex align-items-center">

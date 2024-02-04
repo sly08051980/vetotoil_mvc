@@ -55,7 +55,7 @@
                                     <p class="fs-6 text-danger">Si vous ne trouvez pas la race choisir autre</p>
                                     <input type="text" class="form-control" id="race" name="race" aria-describedby="race de votre animal">
                                     <input type="hidden" class="form-control" id="numero" name="numero" aria-describedby="race de votre animal">
-                                    <input type="hidden" class="form-control" id="patient" name="patient"value="<?=$_SESSION["id"]?>" aria-describedby="race de votre animal">
+                                    <input type="hidden" class="form-control" id="patient" name="patient"value=<?=isset($_SESSION["id"])?>>
                                 </div>
                                 <ul id="raceList"></ul>
                                 <div class="mb-3">

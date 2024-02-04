@@ -67,8 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //gestion de l action en fonction du select
 
-    const form = document.getElementById("choix_animal");
-    if (form) {
+    const formulaire = document.getElementById("choix_animal");
+    if (formulaire) {
     
     let raceanimaux;
     const typeAnimal = document.getElementById("typeAnimal");
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("descriptionAnimal").style.display = "none";
       } else {
         document.getElementById("descriptionAnimal").style.display = "block";
-        const formData = new FormData(form);
+        const formData = new FormData(formulaire);
 
         fetch("?controller=animal&action=fiche_users", {
           method: "POST",

@@ -3,10 +3,10 @@
 <div class="collapse navbar-collapse" id="navbarScroll">
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-auto">
         <li class='nav-item'>
-        <form method="POST" action="?controller=pro&action=modifier_pro">
+        <!-- <form method="POST" action="?controller=pro&action=modifier_pro">
                 <input type="hidden" name="nom" value="<?= $_SESSION['nom'] ?>">
                 <input type="submit" class="bg-transparent border-0 pt-2" id="nom" value="Accueil">
-            </form>
+            </form> -->
            
         </li>
         <li class="nav-item dropdown">
