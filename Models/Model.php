@@ -96,8 +96,11 @@ class Model
             $email = validate_formulaire($email);
 
             $date = date("Y-m-d");
-            $requete = $this->bd->prepare('INSERT INTO patient (id_patient, nom, prenom, adresse, complement_adresse, code_postal, ville, telephone, mdp ,email, date_creation, date_fin) 
-             VALUES (NULL, :nom, :prenom, :adresse, :complementAdresse, :codePostal, :ville, :telephone, :pass, :email, :datejour, NULL)');
+            $droit = "Patient";
+            $requete = $this->bd->prepare('INSERT INTO patient (id_patient, nom, prenom, adresse, complement_adresse, 
+            code_postal, ville, telephone, mdp ,email, date_creation, date_fin,droit_utilisateur) 
+             VALUES (NULL, :nom, :prenom, :adresse, :complementAdresse, :codePostal, :ville, :telephone, 
+             :pass, :email, :datejour, NULL,:droit)');
 
 
             $requete->execute([
@@ -110,7 +113,8 @@ class Model
                 ':telephone' => $telephone,
                 ':pass' => $password,
                 ':email' => $email,
-                ':datejour' => $date
+                ':datejour' => $date,
+                ':droit' => $droit
             ]);
             // $requete = $this->bd->prepare('SELECT * FROM patient WHERE email = :email');
             // $requete->execute([':email'=>$email]);
@@ -122,10 +126,10 @@ class Model
                 'adresse' => $adresse,
                 'ville' => $ville,
                 'telephone' => $telephone,
-                'codePostal' => $codePostal
+                'codePostal' => $codePostal,
+                'droit' => $droit
 
             ];
-
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
@@ -133,12 +137,12 @@ class Model
     }
     public function get_find_animal($animal)
     {
+     
         try {
             $requete = $this->bd->prepare('SELECT race_animal,id_race FROM race JOIN type ON race.id_type=type.id_type WHERE type.type_animal=:animal');
             $requete->execute(array(':animal' => $animal));
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
-
         }
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -155,8 +159,8 @@ class Model
             $requete->execute(array(':email' => $email, 'mdp' => $mdp));
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
-
         }
+
         return $requete->fetchAll(PDO::FETCH_OBJ);
     }
     //#######################################################################################################################
@@ -188,12 +192,10 @@ class Model
             $email = isset($_POST['email']) ? $_POST['email'] : "";
             $email = validate_formulaire($email);
             $password = isset($_POST['password']) ? $_POST['password'] : "";
-            $file = isset($_POST['image']) ? $_POST['image'] : "";
-            var_dump($file);
-            $file1= inserer_image($file);
-            var_dump($file1);
-            $fileImage ="./upload/".$file1;
-die;
+            $file = isset($_FILES['file']) ? $_FILES['file'] : "";
+            $file1 = inserer_image($file);
+            $fileImage = "./Content/img/utilisateur/" . $file1;
+
             $administrateur = "Admin";
 
             $dates = date("Y-m-d");
@@ -216,7 +218,7 @@ die;
                 ':telephoneDirigeant' => $telephoneDirigeant,
                 ':email' => $email,
                 ':passw' => $password,
-                'images' =>$fileImage,
+                'images' => $fileImage,
                 ':dates' => $dates,
                 ':administrateur' => $administrateur
             ]);
@@ -233,7 +235,7 @@ die;
                 'telephoneSociete' => $telephoneSociete,
                 'telephoneDirigeant' => $telephoneDirigeant,
                 'email' => $email,
-                'images'=>$fileImage,
+                'images' => $fileImage,
                 'administrateur' => $administrateur
 
             ];
@@ -257,7 +259,6 @@ die;
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
         return $requete->fetchAll(PDO::FETCH_OBJ);
-
     }
     public function get_recherche_pro_valide($siret, $mdp)
     {
@@ -289,12 +290,15 @@ die;
             $email = $_POST['email'];
             $profession = $_POST['profession'];
             $password = $_POST['password'];
+            $file = isset($_FILES['file']) ? $_FILES['file'] : "";
+            $file1 = inserer_image($file);
+            $fileImage = "./Content/img/utilisateur/" . $file1;
             $dates = date("Y-m-d");
 
             $requete = $this->bd->prepare("INSERT INTO employer (id_employer, nom, prenom, adresse, complement_adresse, code_postal,
-             ville, telephone, email, profession, password, date_creation) 
+             ville, telephone, email, profession, password,images, date_creation) 
              VALUES (NULL, :nom, :prenom, :adresse, :complementAdresse, :codePostal, :ville, :telephone, :email, :profession,
-             :password, :dates)");
+             :password,:images, :dates)");
 
             $requete->execute([
                 ':nom' => $nom,
@@ -307,6 +311,7 @@ die;
                 ':email' => $email,
                 ':profession' => $profession,
                 ':password' => $password,
+                ':images' => $fileImage,
                 ':dates' => $dates
             ]);
 
@@ -352,7 +357,6 @@ die;
                 ':siret' => $siret,
                 ':resultat' => $resultat->id_employer
             ]);
-
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
@@ -396,7 +400,7 @@ die;
              WHERE societe.siret = :siret;");
 
 
-            
+
             $requete->execute([
                 ':siret' => $siret,
                 ':nomDirigeant' => $nomDirigeant,
@@ -411,10 +415,32 @@ die;
 
 
             ]);
-
-        }   catch (PDOException $e) {
+        } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
         return $requete->fetchAll(PDO::FETCH_OBJ);
+    }
+    //#######################################################################################################################
+    //fonction ajouter animal
+    //#######################################################################################################################
+    public function get_enregistrer_animal(array $data){
+        try {
+            $id= $_POST['patient'];
+            $prenom=$_POST['prenom'];
+            $dateNaissance=$_POST['dateNaissance'];
+            $race=$_POST['numero'];
+            echo $id;
+            echo "</br>";
+            echo $prenom;
+            echo "</br>";
+            echo $dateNaissance;
+            echo "</br>";
+            echo $race;
+            echo "</br>";
+            die;
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+
     }
 }

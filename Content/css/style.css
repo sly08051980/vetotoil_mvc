@@ -24,6 +24,9 @@ strong{
 .taille-image{
     width: 8%;
 }
+.image-pro{
+    width: 30%;
+}
 .btn-custom {
     background-color:purple !important;
 width: 100%;

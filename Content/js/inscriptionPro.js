@@ -219,9 +219,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  if(inscriptionPro || ajoutEmployer){
+
+ 
+let btnSubmit=document.getElementById("submit");
 let image=document.getElementById('image');
-if (image.value==""){
-  console.log("image")
+
+btnSubmit.addEventListener("click",function(event){
+ 
+  if (image.value===""){
+    console.log("nop")
+  }else{
+  console.log("image");
+  let checkbox = document.getElementById("checkbox");
+  if(checkbox.checked){
+    console.log("cocher");
+  }else{
+    console.log("non cocher");
+    alert("veuillez cocher valider la politique de confidentialité des images pour poursuivre");
+    event.preventDefault();
+    return false;//arrete le submit
+  }
+  }
+
+})
 }
 
 });

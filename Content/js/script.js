@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //gestion de l action en fonction du select 
 
-    const form = document.getElementById("choix");
+    const form = document.getElementById("choix_animal");
     let raceanimaux;
     const typeAnimal = document.getElementById("typeAnimal");
     const race = document.getElementById("race");
@@ -85,12 +85,14 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('descriptionAnimal').style.display="block";
         const formData = new FormData(form);
     
-        fetch('?controller=acces&action=fiche_users', {
+        fetch('?controller=animal&action=fiche_users', {
           method: 'POST',
           body: formData,
         })
+        
         .then(response => response.json())
         .then(data => {
+          console.log("Réponse du serveur :", data);
           raceanimaux = data.raceanimaux;
           console.log("test: ", raceanimaux);
         })
@@ -115,7 +117,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if(raceList.style.display="none"){
       raceList.style.display="block"
     }
-      results.forEach(result => {
+    const nbrAffichage = 10;
+  const resultats = results.slice(0, nbrAffichage);
+      resultats.forEach(result => {
         const listItem = document.createElement("li");
     
         listItem.textContent = result.race_animal;
@@ -138,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const idRace = li.dataset.idRace;
     
         document.getElementById('race').value = nomRace;
+        document.getElementById('numero').value=idRace;
         // document.getElementById('race').value = idRace;
         raceList.style.display = "none";
       });

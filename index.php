@@ -11,7 +11,7 @@ require_once('Utils/header.php');
 require_once('Utils/function_validation_text.php');
 
 
-$controllers=['home','acces','session','pro'];
+$controllers=['home','acces','session','pro','animal'];
 $controller_default='home';
 
 

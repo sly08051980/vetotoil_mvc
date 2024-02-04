@@ -19,6 +19,7 @@ class Controller_session extends Controller
     
         if ($isConnect) {
             $this->render('session_connect', $isConnect);
+            
         } else {
             $this->render('error');
         }

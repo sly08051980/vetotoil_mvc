@@ -1,31 +1,31 @@
 <div class="row" id="ajout_employer">
-    <div class="col-4">
-        <div class="card">
-            <img src="" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Société :
-                    <?= $_SESSION['nom'] ?>
-                </h5>
-                <p class="card-text">Nom :
-                    <?= $_SESSION['prenom'] ?>
-                </p>
-                <p class="card-text">Adresse :
-                    <?= $_SESSION['adresse'] ?>
-                </p>
-                <p class="card-text">Ville :
-                    <?= $_SESSION['ville'] ?>
-                </p>
-            </div>
-            <button class="btn btn-custom rounded-pill" id="btn_ajout_employer">Ajouter Employer</button>
+<div class="col-12 col-sm-4">
+    <div class="card">
+        <img src="<?=$_SESSION['images']?>" class="card-img-top image-pro" alt="image societe">
+        <div class="card-body">
+            <h5 class="card-title">Société :
+                <?= $_SESSION['nom'] ?>
+            </h5>
+            <p class="card-text">Nom :
+                <?= $_SESSION['prenom'] ?>
+            </p>
+            <p class="card-text">Adresse :
+                <?= $_SESSION['adresse'] ?>
+            </p>
+            <p class="card-text">Ville :
+                <?= $_SESSION['ville'] ?>
+            </p>
         </div>
+        <button class="btn btn-custom rounded-pill" id="btn_ajout_employer">Ajouter Employer</button>
     </div>
+</div>
 
-    <div class="col-8 invisible" id="employer">
+    <div class="col-12 col-sm-8 invisible" id="employer">
         <div class="card">
             <form action="?controller=pro&action=enregistrement_employer" method="POST">
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                         <div class="mb-3">
                             <label for="nom" class="form-label">Nom</label>
                             <input type="text" class="form-control" id="nom" name="nom" aria-describedby="nom">
@@ -51,12 +51,13 @@
                             <label for="ville" class="form-label">Ville</label>
                             <input type="text" class="form-control" id="ville" name="ville" aria-describedby="ville">
                         </div>
-                    </div>
-                    <div class="col-6">
                         <div class="mb-3">
                             <label for="telephone" class="form-label">Téléphone</label>
                             <input type="text" class="form-control" id="telephone" name="telephone" aria-describedby="telephone">
                         </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                    
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" aria-describedby="email">
@@ -108,9 +109,27 @@
                             <label for="dimanche">Dimanche</label>
                         </div>
                         <input type="hidden" name="siret" value="<?=$_SESSION['siret'];?>">
+
+                        <div class="mb-3">
+            <label for="file">Choisir une image qui sera utilisé dans les recheche utilisateur</label>
+            </br>
+            <input type="file" name="file" id="image">
+        </div>
+        <span id="passwordHelpInline" class="form-text">
+            En cochant la case ci-dessous, je confirme avoir lu, compris et accepté l'ensemble des dispositions relatives à l'utilisation d'images sur la plateforme Vetotoil.
+        </span>
+        <div class="form-check">
+
+            <input class="form-check-input" type="checkbox" value="checkbox" id="checkbox">
+            <label class="form-check-label" for="flexCheckDefault">
+                <span id="passwordHelpInline" class="form-text">
+                    J'accepte les Conditions Générales d'Utilisation de Vetotoil.
+                </span>
+            </label>
+        </div>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-custom rounded-pill" value="Valider">
+                <input type="submit" class="btn btn-custom rounded-pill" id="submit" value="Valider">
             </form>
 
         </div>
