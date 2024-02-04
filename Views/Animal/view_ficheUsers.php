@@ -72,7 +72,7 @@
                                     <input type="hidden" class="form-control" id="raceValide" name="raceValide" aria-describedby="prenom de votre animal">
                                 </div>
                                 <input type="submit" value="Valider">
-                                <form>
+</form>
                         </div>
 
                     </div>

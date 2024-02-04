@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   //#################################################################################################
   let home = document.getElementById("home");
   if (home) {
-    
     //debut écriture vétérinaire toiletteur
     const choice = ["Vétérinaire", "Toiletteur"];
     let counter = 0;
@@ -61,94 +60,91 @@ document.addEventListener("DOMContentLoaded", function () {
     //gestion de l affichage pour ajouter un animal apres l inscription
 
     let boutonAnimal = document.getElementById("boutonAnimal");
-  
 
     boutonAnimal.addEventListener("click", function () {
       document.getElementById("afficherAnimal").classList.toggle("invisible"); //affiche la class invisible
-    
     });
 
-    //gestion de l action en fonction du select 
+    //gestion de l action en fonction du select
 
     const form = document.getElementById("choix_animal");
+    if (form) {
+    
     let raceanimaux;
     const typeAnimal = document.getElementById("typeAnimal");
     const race = document.getElementById("race");
-    const raceList = document.getElementById("raceList"); 
-    document.getElementById('descriptionAnimal').style.display="none";
-    
+    const raceList = document.getElementById("raceList");
+    document.getElementById("descriptionAnimal").style.display = "none";
+
     typeAnimal.addEventListener("change", function () {
       if (typeAnimal.value === "selection") {
         console.log("selection");
-        document.getElementById('descriptionAnimal').style.display="none";
+        document.getElementById("descriptionAnimal").style.display = "none";
       } else {
-        document.getElementById('descriptionAnimal').style.display="block";
+        document.getElementById("descriptionAnimal").style.display = "block";
         const formData = new FormData(form);
-    
-        fetch('?controller=animal&action=fiche_users', {
-          method: 'POST',
+
+        fetch("?controller=animal&action=fiche_users", {
+          method: "POST",
           body: formData,
         })
-        
-        .then(response => response.json())
-        .then(data => {
-          console.log("Réponse du serveur :", data);
-          raceanimaux = data.raceanimaux;
-          console.log("test: ", raceanimaux);
-        })
-        .catch(error => {
-          console.error('erreur lors de la requete', error);
-        });
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Réponse du serveur :", data);
+            raceanimaux = data.raceanimaux;
+            console.log("test: ", raceanimaux);
+          })
+          .catch((error) => {
+            console.error("erreur lors de la requete", error);
+          });
       }
     });
-    
+
     race.addEventListener("input", function () {
       const searchTerm = race.value.toLowerCase();
-    
+
       // recherche les resultat en fonction de ce qui est taper
-      const resultat = raceanimaux.filter(obj => obj.race_animal.toLowerCase().includes(searchTerm));
-    
-      
+      const resultat = raceanimaux.filter((obj) =>
+        obj.race_animal.toLowerCase().includes(searchTerm)
+      );
+
       afficheResultat(resultat);
     });
     //affiche les resultats dans la liste
     function afficheResultat(results) {
       raceList.innerHTML = "";
-    if(raceList.style.display="none"){
-      raceList.style.display="block"
-    }
-    const nbrAffichage = 10;
-  const resultats = results.slice(0, nbrAffichage);
-      resultats.forEach(result => {
+      if ((raceList.style.display = "none")) {
+        raceList.style.display = "block";
+      }
+      const nbrAffichage = 10;
+      const resultats = results.slice(0, nbrAffichage);
+      resultats.forEach((result) => {
         const listItem = document.createElement("li");
-    
+
         listItem.textContent = result.race_animal;
-    
-        
+
         listItem.dataset.nomRace = result.race_animal;
         listItem.dataset.idRace = result.id_race;
-    
-        clickLi(listItem,raceList);
-    
+
+        clickLi(listItem, raceList);
+
         raceList.appendChild(listItem);
       });
     }
-    
-    function clickLi(listItem,raceList) {
+
+    function clickLi(listItem, raceList) {
       listItem.addEventListener("click", (event) => {
         const li = event.currentTarget;
-    
+
         const nomRace = li.dataset.nomRace;
         const idRace = li.dataset.idRace;
-    
-        document.getElementById('race').value = nomRace;
-        document.getElementById('numero').value=idRace;
+
+        document.getElementById("race").value = nomRace;
+        document.getElementById("numero").value = idRace;
         // document.getElementById('race').value = idRace;
         raceList.style.display = "none";
       });
     }
-    
-    
+    }
   }
-
 });

@@ -33,3 +33,4 @@ class Controller_animal extends Controller
         $userData = ['enregistrer' => $m->get_enregistrer_animal($_POST)];
     }
 }
+?>
