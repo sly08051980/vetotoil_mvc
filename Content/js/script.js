@@ -93,10 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => {
           // refaire le json car il y a du html dedans
           return response.text().then((html) => {
-            const jsonStart = html.indexOf('{');
-            const jsonEnd = html.lastIndexOf('}') + 1;
-            const jsonContent = html.substring(jsonStart, jsonEnd);
-            return JSON.parse(jsonContent);
+            const jsonStart = html.indexOf('{');//recherche le premier caractere pour le json
+            const jsonEnd = html.lastIndexOf('}') + 1;//recherche le dernier caractere pour le json
+            const jsonContent = html.substring(jsonStart, jsonEnd);//supprime la partie txt html 
+            return JSON.parse(jsonContent);//recrée le json
           });
         })
         .then((data) => {
