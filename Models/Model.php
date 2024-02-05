@@ -425,22 +425,31 @@ class Model
     //#######################################################################################################################
     public function get_enregistrer_animal(array $data){
         try {
-            $id= $_POST['patient'];
+            $id = $_POST['patient'];
+          
             $prenom=$_POST['prenom'];
             $dateNaissance=$_POST['dateNaissance'];
             $race=$_POST['numero'];
-            echo $id;
-            echo "</br>";
-            echo $prenom;
-            echo "</br>";
-            echo $dateNaissance;
-            echo "</br>";
-            echo $race;
-            echo "</br>";
-            die;
+            $dates = date("Y-m-d");
+            $requete = $this->bd->prepare('INSERT INTO animal (id_animal, prenom, date_naissance,date_creation,date_fin, id_race, id_patient)
+             VALUES (NULL, :prenom, :dateNaissance,:dates,Null, :race, :id);');
+
+
+            $requete->execute([
+                ':prenom' => $prenom,
+                ':race' => $race,
+                ':dateNaissance' => $dateNaissance,
+                ':id' => $id,
+                ':dates'=>$dates
+            ]);
+         
+        
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
 
+    }
+    public function get_modifier_animal(){
+        
     }
 }

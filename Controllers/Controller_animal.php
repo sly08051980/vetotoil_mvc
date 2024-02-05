@@ -14,6 +14,11 @@ class Controller_animal extends Controller
     public function action_ajouter_animal(){
         $this->render('ficheUsers');
     }
+    public function action_modifier_animal(){
+        $m = Model::get_model();
+        $modifier = ['modifier' => $m->get_modifier_animal($_POST)];
+        $this->render('modifier_animal');
+    }
     public function action_fiche_users()
     {
         $animal = isset($_POST['typeAnimal']) ? $_POST['typeAnimal'] : null;

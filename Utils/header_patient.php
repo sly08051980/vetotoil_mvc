@@ -31,7 +31,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="?controller=animal&action=ajouter_animal">Ajouter un animal</a></li>
-                <li><a class="dropdown-item" href="#">Modifier un animal</a></li>
+                <li><a class="dropdown-item" href="?controller=animal&action=modifier_animal">Modifier un animal</a></li>
                 <li><a class="dropdown-item" href="#">Suivi traitement</a></li>
            
                 <li>
