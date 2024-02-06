@@ -14,6 +14,12 @@ class Controller_animal extends Controller
     public function action_ajouter_animal(){
         $this->render('ficheUsers');
     }
+    public function action_modifier_animal(){
+        $idPatient=$_POST['patient'];
+        $m = Model::get_model();
+        $modif = ['modifier' => $m->get_modifier_animal($idPatient)];
+        $this->render('modifier_animal',$modif);
+    }
     public function action_fiche_users()
     {
         $animal = isset($_POST['typeAnimal']) ? $_POST['typeAnimal'] : null;
@@ -32,5 +38,6 @@ class Controller_animal extends Controller
 
         $userData = ['enregistrer' => $m->get_enregistrer_animal($_POST)];
     }
+
 }
 ?>

@@ -70,9 +70,6 @@
               <?php
             }
             ?>
-     
-
-
             <?php
             if (isset($_SESSION["droit_utilisateur"])){
               if  ($_SESSION["droit_utilisateur"]=='Admin'){

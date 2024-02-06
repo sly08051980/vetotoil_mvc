@@ -425,22 +425,43 @@ class Model
     //#######################################################################################################################
     public function get_enregistrer_animal(array $data){
         try {
-            $id= $_POST['patient'];
+            $id = $_POST['patient'];
+          
             $prenom=$_POST['prenom'];
             $dateNaissance=$_POST['dateNaissance'];
             $race=$_POST['numero'];
-            echo $id;
-            echo "</br>";
-            echo $prenom;
-            echo "</br>";
-            echo $dateNaissance;
-            echo "</br>";
-            echo $race;
-            echo "</br>";
-            die;
+            $dates = date("Y-m-d");
+            $requete = $this->bd->prepare('INSERT INTO animal (id_animal, prenom_animal, date_naissance,date_creation,date_fin, id_race, id_patient)
+             VALUES (NULL, :prenom, :dateNaissance,:dates,Null, :race, :id);');
+
+
+            $requete->execute([
+                ':prenom' => $prenom,
+                ':race' => $race,
+                ':dateNaissance' => $dateNaissance,
+                ':id' => $id,
+                ':dates'=>$dates
+            ]);
+         
+        
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
+
+    }
+    public function get_modifier_animal($idPatient){
+        try {
+
+            // $requete = $this->bd->prepare('SELECT * FROM animal WHERE id_patient =:id');
+            $requete = $this->bd->prepare('SELECT animal.id_animal,animal.prenom,race.race_animal,patient.nom,patient.prenom 
+            FROM animal JOIN race ON animal.id_race=race.id_race JOIN patient ON animal.id_patient=patient.id_patient WHERE animal.id_patient=:id');
+            
+            $requete->execute(array(':id' => $idPatient));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+
+return $requete->fetchAll(PDO::FETCH_OBJ);
 
     }
 }

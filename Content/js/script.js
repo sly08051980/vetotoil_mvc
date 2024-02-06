@@ -77,10 +77,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("descriptionAnimal").style.display = "none";
 
     typeAnimal.addEventListener("change", function () {
+      
       if (typeAnimal.value === "selection") {
         console.log("selection");
         document.getElementById("descriptionAnimal").style.display = "none";
       } else {
+      
         document.getElementById("descriptionAnimal").style.display = "block";
         const formData = new FormData(formulaire);
 
@@ -88,12 +90,33 @@ document.addEventListener("DOMContentLoaded", function () {
           method: "POST",
           body: formData,
         })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("Réponse du serveur :", data);
-            raceanimaux = data.raceanimaux;
-            console.log("test: ", raceanimaux);
-          })
+        .then((response) => {
+          // refaire le json car il y a du html dedans
+          return response.text().then((html) => {
+            const jsonStart = html.indexOf('{');//recherche le premier caractere pour le json
+            const jsonEnd = html.lastIndexOf('}') + 1;//recherche le dernier caractere pour le json
+            const jsonContent = html.substring(jsonStart, jsonEnd);//supprime la partie txt html 
+            return JSON.parse(jsonContent);//recrée le json
+          });
+        })
+        .then((data) => {
+          // traitement du json
+          console.log("Réponse du serveur (JSON) :", data);
+          raceanimaux = data.raceanimaux;
+          console.log("test: ", raceanimaux);
+          
+          // traitement de la reponse json
+          race.addEventListener("input", function () {
+            const raceChien = race.value.toLowerCase();
+      
+            // recherche les résultats en fonction de ce qui est tapé
+            const resultat = raceanimaux.filter((obj) =>
+              obj.race_animal.toLowerCase().includes(raceChien)
+            );
+      
+            afficheResultat(resultat);
+          });
+        })
           .catch((error) => {
             console.error("erreur lors de la requete", error);
           });
