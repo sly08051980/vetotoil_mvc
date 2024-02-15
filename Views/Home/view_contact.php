@@ -3,18 +3,23 @@
 
 
 <div class="container ">
+<div class="card shadow-lg p-3 mb-5 bg-body rounded border-5 ">
             <div class="row">
                 <div class="col-12 justify-content-center py-5">
                     <h1 class="text-center">Contact</h1>
                 </div>
             </div>
+</div>
             <div class="row justify-content-center">
                 <form class="col-lg-8" action="?home&action=contact_email" method="POST">
+                    
                     <div class="row justify-content-center">
+                        
                         <div class="col-lg-5">
+                        <div class="card shadow-lg p-3 mb-5 bg-body rounded border-5 ">
 
-                            <label for="sujet" class="form-label">Sujet</label>
-                            <select class="form-select" id="sujet" aria-label="Sélectionnez une option">
+                            <label for="sujet" class="form-label">Sujet :</label>
+                            <select class="form-select" name ="sujet" id="sujet" aria-label="Sélectionnez une option">
                                 <option selected>Choisissez...</option>
                                 <option value="particulierIns">Inscription Particulier</option>
                                 <option value="ProfessionnelIns">Inscription Professionnel</option>
@@ -24,10 +29,11 @@
                                 <option value="mentionlegale">Mention Légale</option>
                                 <option value="autres">Autres</option>
                             </select>
-
+</div>
                         </div>
                         <div class="row">
                             <!-- Colonnes de gauche -->
+                            
                             <div class="col-lg-5">
 
                                 <div class="mb-3">
@@ -71,7 +77,7 @@
                     <!-- Bouton au bas du milieu -->
                     <div class="row justify-content-center">
                         <div class="col-lg-8 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-custom rounded-pill">Submit</button>
                         </div>
                     </div>
                 </form>

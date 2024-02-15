@@ -15,9 +15,10 @@ class Controller_animal extends Controller
         $this->render('ficheUsers');
     }
     public function action_modifier_animal(){
+        $idPatient=$_POST['patient'];
         $m = Model::get_model();
-        $modifier = ['modifier' => $m->get_modifier_animal($_POST)];
-        $this->render('modifier_animal');
+        $modif = ['modifier' => $m->get_modifier_animal($idPatient)];
+        $this->render('modifier_animal',$modif);
     }
     public function action_fiche_users()
     {
@@ -37,5 +38,14 @@ class Controller_animal extends Controller
 
         $userData = ['enregistrer' => $m->get_enregistrer_animal($_POST)];
     }
+    public function action_supprimer_animal(){
+
+        $m = Model::get_model();
+
+        $suppAnimal = ['supprimer' => $m->get_supprimer_animal($_POST)];
+    }
+
 }
+
+
 ?>

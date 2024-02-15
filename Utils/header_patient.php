@@ -16,7 +16,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#">Voir mes rdv</a></li>
                 <li><a class="dropdown-item" href="#">Rechercher toiletteur</a></li>
-                <li><a class="dropdown-item" href="#">Rechercher Vétérinaire</a></li>
+                <li><a class="dropdown-item" href="?controller=rdv&action=recherche_rdv">Rechercher Vétérinaire</a></li>
+               
            
                 <li>
                     <hr class="dropdown-divider">
@@ -31,7 +32,11 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="?controller=animal&action=ajouter_animal">Ajouter un animal</a></li>
-                <li><a class="dropdown-item" href="?controller=animal&action=modifier_animal">Modifier un animal</a></li>
+                <form action="?controller=animal&action=modifier_animal"method="POST">
+                    <input type="hidden"  name='patient' value='<?= $_SESSION['id']?>'>
+                <input type="submit" value="Modifier un animal" class='border-0 ms-3'>
+                </form>
+               
                 <li><a class="dropdown-item" href="#">Suivi traitement</a></li>
            
                 <li>

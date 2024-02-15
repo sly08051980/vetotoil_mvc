@@ -431,7 +431,7 @@ class Model
             $dateNaissance=$_POST['dateNaissance'];
             $race=$_POST['numero'];
             $dates = date("Y-m-d");
-            $requete = $this->bd->prepare('INSERT INTO animal (id_animal, prenom, date_naissance,date_creation,date_fin, id_race, id_patient)
+            $requete = $this->bd->prepare('INSERT INTO animal (id_animal, prenom_animal, date_naissance_animal,date_creation_animal,date_fin_animal, id_race, id_patient)
              VALUES (NULL, :prenom, :dateNaissance,:dates,Null, :race, :id);');
 
 
@@ -449,7 +449,31 @@ class Model
         }
 
     }
-    public function get_modifier_animal(){
-        
+    public function get_modifier_animal($idPatient){
+        try {
+
+            // $requete = $this->bd->prepare('SELECT * FROM animal WHERE id_patient =:id');
+            $requete = $this->bd->prepare('SELECT animal.date_naissance_animal, animal.id_animal,animal.prenom_animal,race.race_animal,patient.nom,patient.prenom 
+            FROM animal JOIN race ON animal.id_race=race.id_race JOIN patient ON animal.id_patient=patient.id_patient WHERE animal.id_patient=:id AND animal.date_fin_animal IS NULL');
+            
+            $requete->execute(array(':id' => $idPatient));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+
+return $requete->fetchAll(PDO::FETCH_OBJ);
+
+    }
+    public function get_supprimer_animal(array $data){
+        try{
+            $idAnimal=$_POST['idAnimal'];
+            $dates = date("Y-m-d");
+            $requete=$this->bd->prepare('UPDATE animal SET date_fin_animal = :dates WHERE animal.id_animal = :idAnimal');
+            $requete->execute(array(':idAnimal' => $idAnimal,':dates'=>$dates));
+
+
+        }catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
     }
 }

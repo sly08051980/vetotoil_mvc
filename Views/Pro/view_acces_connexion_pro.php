@@ -1,8 +1,11 @@
 <div class="container">
             <div class="row">
+            <div class="card shadow-lg p-3 mb-5 bg-body rounded border-5 ">
                 <div class="col-12 justify-content-center py-5">
                     <h1 class="text-center">Connexion Professionnel</h1>
                 </div>
+</div>
+<div class="card shadow-lg p-3 mb-5 bg-body rounded border-5 ">
                 <form class="col-lg-5" action="?controller=pro&action=connexion_professionnel" method="POST">
                     <div class="mb-3">
                         <label for="siret" class="form-label">Siret</label>
@@ -32,4 +35,5 @@
                     </div>
                 </div>
             </div>
+</div>
         </div>
