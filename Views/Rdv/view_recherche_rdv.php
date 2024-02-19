@@ -49,7 +49,11 @@ $date_demain_str = $date_demain->format('Y-m-d');
                 }
                 // variable pour la premiere date trouvé
                 $firstDateDisplayed = true;
+<<<<<<< HEAD
                 break; 
+=======
+                break; // arrêter dès qu'un résultat est trouvé
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
             }
         }
                             ?>

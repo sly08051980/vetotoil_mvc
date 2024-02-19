@@ -55,7 +55,10 @@ function inserer_image($file)
             echo "Erreur lors du téléchargement du fichier.";
         }
     } 
+<<<<<<< HEAD
 
+=======
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
 }
 function mdp($data){
     $data= password_hash($data, PASSWORD_DEFAULT);

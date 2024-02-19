@@ -25,7 +25,11 @@
                     <div class="col-lg-4">
                         <div class="mb-3">
                             <label for="siret" class="form-label">Numero Siret</label>
+<<<<<<< HEAD
                             <input type="text" class="form-control" name="siret" id="siret" aria-describedby="siret" required>
+=======
+                            <input type="text" class="form-control" name="siret" id="siret" aria-describedby="siret">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
 
                             <button type="button" class="btn btn-custom rounded-pill" id="button">Rechercher</button>
 
@@ -33,7 +37,11 @@
                         <div class="mb-3">
                             <label for="nomSociete" class="form-label">Nom Société</label>
                             <input type="text" class="form-control" name="nomSociete" id="nomSociete"
+<<<<<<< HEAD
                                 aria-describedby="nomSociete" required>
+=======
+                                aria-describedby="nomSociete">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
                         </div>
                         <div class="mb-3">
                             <label name="profession" for="profession" class="form-label">Profession</label>
@@ -49,7 +57,11 @@
                         <div class="mb-3">
                             <label for="nomDirigeant" class="form-label">Nom du Dirigeant</label>
                             <input type="text" class="form-control" name="nomDirigeant" id="nomDirigeant"
+<<<<<<< HEAD
                                 aria-describedby="nomDirigeant" required>
+=======
+                                aria-describedby="nomDirigeant">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
                             <ul id="list"></ul></label>
                         </div>
 
@@ -61,7 +73,11 @@
                         <div class="mb-3">
                             <label for="adresse" class="form-label">Adresse</label>
                             <input type="text" class="form-control" name="adresse" id="adresse"
+<<<<<<< HEAD
                                 aria-describedby="adresse" required>
+=======
+                                aria-describedby="adresse">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
                         </div>
                         <div class="mb-3">
                             <label for="complementAdresse" class="form-label">Complément Adresse</label>
@@ -71,11 +87,19 @@
                         <div class="mb-3">
                             <label for="codePostal" class="form-label">Code Postal</label>
                             <input type="text" class="form-control" name="codePostal" id="codePostal"
+<<<<<<< HEAD
                                 aria-describedby="codePostal" required>
                         </div>
                         <div class="mb-3">
                             <label for="ville" class="form-label">Ville</label>
                             <input type="text" class="form-control" name="ville" id="ville" aria-describedby="ville" required>
+=======
+                                aria-describedby="codePostal">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ville" class="form-label">Ville</label>
+                            <input type="text" class="form-control" name="ville" id="ville" aria-describedby="ville">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
                         </div>
 
 
@@ -84,20 +108,33 @@
                         <div class="mb-3">
                             <label for="telephoneSociete" class="form-label">Téléphone Société</label>
                             <input type="tel" class="form-control" name="telephoneSociete" id="telephoneSociete"
+<<<<<<< HEAD
                                 aria-describedby="telephoneSociete" pattern="[0-9]{10}" required>
+=======
+                                aria-describedby="telephoneSociete" pattern="[0-9]{10}">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
                         </div>
                         <div class="mb-3">
                             <label for="telephoneDirigeant" class="form-label">Téléphone Dirigeant</label>
                             <input type="tel" class="form-control" name="telephoneDirigeant" id="telephoneDirigeant"
+<<<<<<< HEAD
                                 aria-describedby="telephoneDirigeant" pattern="[0-9]{10}" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" name="email" id="email" aria-describedby="email" required>
+=======
+                                aria-describedby="telephoneDirigeant" pattern="[0-9]{10}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" aria-describedby="email">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
                         </div>
                         <div class="mb-3">
 
                             <label for="password" class="form-label">Mot de passe</label>
+<<<<<<< HEAD
                             <input type="password" class="form-control" name="password" id="password" required>
                         </div>
                         <ul id="ulVisible" class="d-none">
@@ -142,6 +179,13 @@
                         <div class="mb-3">
                             <label for="repassword" class="form-label">Confirmer le mot de passe</label>
                             <input type="password" class="form-control" id="repassword" required>
+=======
+                            <input type="password" class="form-control" name="password" id="password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="repassword" class="form-label">Confirmer le mot de passe</label>
+                            <input type="password" class="form-control" id="repassword">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
                         </div>
                     </div>
 
@@ -171,7 +215,11 @@
                     </label>
                 </div>
                 <div class="col-lg-8 text-center">
+<<<<<<< HEAD
                     <input id="submit" type="submit" class="btn btn-custom rounded-pill" value="Envoyer" >
+=======
+                    <input id="submit" type="submit" class="btn btn-custom rounded-pill" value="Envoyer">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
                 </div>
             </div>
             </form>

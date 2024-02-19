@@ -578,27 +578,48 @@ public function get_editer_employer($siret,$employer){
         // recherche sur deux semaine
         $date_debut = date('Y-m-d');
         $date_fin = date('Y-m-d', strtotime('+14 days'));
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
         // Recherche des informations sur la commune
         $requete_commune = $this->bd->prepare("SELECT * FROM commune WHERE code_postal = '13011'");
         $requete_commune->execute();
         $row = $requete_commune->fetch(PDO::FETCH_ASSOC);
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
         $latitude = $row['latitude'];
         $longitude = $row['longitude'];
         // echo "Latitude: $latitude<br>";
         // echo "Longitude: $longitude<br>";
+<<<<<<< HEAD
 
         $formule = "(6366*acos(cos(radians($latitude))*cos(radians(`latitude`))*cos(radians(`longitude`)-radians($longitude))+sin(radians($latitude))*sin(radians(`latitude`))))";
         // distance 10km
         $distance = 10;
+=======
+    
+        $formule = "(6366*acos(cos(radians($latitude))*cos(radians(`latitude`))*cos(radians(`longitude`)-radians($longitude))+sin(radians($latitude))*sin(radians(`latitude`))))";
+    
+        $distance = 10; // Par exemple, une distance de 10 kilomètres
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
         $sql = "SELECT nom_commune, $formule AS dist FROM commune WHERE $formule <= :distance ORDER BY dist ASC";
         $res = $this->bd->prepare($sql);
         $res->bindParam(':distance', $distance);
         $res->execute();
+<<<<<<< HEAD
 
         $r = $res->fetch(PDO::FETCH_ASSOC);
 
+=======
+    
+        $r = $res->fetch(PDO::FETCH_ASSOC);
+    
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
         // Recherche des employés
         $requete_employes = $this->bd->prepare("
         SELECT e.id_employer, e.nom, e.prenom, a.jours_travailler,
@@ -613,12 +634,21 @@ public function get_editer_employer($siret,$employer){
               WHERE $formule <= :distance
           )
     ");
+<<<<<<< HEAD
 
         $requete_employes->execute(array(':profession' => $profession, ':distance' => $distance));
         $employes = $requete_employes->fetchAll(PDO::FETCH_ASSOC);
 
         $tableau = [];
 
+=======
+    
+    $requete_employes->execute(array(':profession' => $profession, ':distance' => $distance));
+    $employes = $requete_employes->fetchAll(PDO::FETCH_ASSOC);
+    
+        $tableau = [];
+    
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
 
         foreach ($employes as $employe) {
 
@@ -626,6 +656,7 @@ public function get_editer_employer($siret,$employer){
 
 
             $tableau[$employe_id] = [
+<<<<<<< HEAD
 
                 "nom" => $employe['nom'],
                 "prenom" => $employe['prenom'],
@@ -639,12 +670,31 @@ public function get_editer_employer($siret,$employer){
                 "ville" => $employe['ville']
 
 
+=======
+                
+                    "nom" => $employe['nom'],
+                    "prenom" => $employe['prenom'],
+                    "profession" => $profession,
+                    'date_debut' => $date_debut,
+                    "date_fin" => $date_fin,
+                    "telephone_societe"=>$employe['telephone_societe'],
+                    "adresse"=>$employe['adresse'],
+                    "complement_adresse"=>$employe['complement_adresse'],
+                    "code_postal"=>$employe['code_postal'],
+                    "ville"=>$employe['ville']
+
+                
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
             ];
 
 
             $jours_travailles = json_decode($employe['jours_travailler'], true);
 
+<<<<<<< HEAD
 
+=======
+         
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
             // Boucle sur chaque jour de la période
             $date = $date_debut;
             while ($date <= $date_fin) {
@@ -698,9 +748,15 @@ public function get_editer_employer($siret,$employer){
                         "$date" => [
                             "$jour_semaine_fr" => [
                                 $creneaux_disponibles
+<<<<<<< HEAD
                             ]
                         ]
                     ];
+=======
+                        ]
+                    ]
+                            ];
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
 
                 }
 

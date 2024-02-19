@@ -26,7 +26,11 @@
     <div class="col-12 col-sm-8 invisible" id="employer">
         <div class="card">
         <div class="card shadow-lg p-3 mb-5 bg-body rounded border-5 ">
+<<<<<<< HEAD
             <form action="?controller=pro&action=enregistrement_employer" method="POST" enctype="multipart/form-data">
+=======
+            <form action="?controller=pro&action=enregistrement_employer" method="POST">
+>>>>>>> b44879ff3442b2b9334c1b1cb23afd3f6182047c
 
                 <div class="row">
                     <div class="col-12 col-sm-6">
