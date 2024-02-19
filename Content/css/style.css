@@ -67,7 +67,9 @@ li{
 .espacemain{
     padding-top: 5rem;
 }
-
+.text-font{
+    font-size: 12px;
+}
 
 @media (min-width: 768px) and (max-width: 1199px) {
     

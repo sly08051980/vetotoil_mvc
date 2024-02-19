@@ -16,7 +16,7 @@
                 Employer
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Gestion Employer</a></li>
+                <li><a class="dropdown-item" href="?controller=pro&action=gestion_employer">Gestion Employer</a></li>
                 <li><a class="dropdown-item" href="#">Ajouter Employer</a></li>
                 <li><a class="dropdown-item" href="#">Voir RDV Employer</a></li>
                 <li><a class="dropdown-item" href="#">Recherche RDV Employer</a></li>

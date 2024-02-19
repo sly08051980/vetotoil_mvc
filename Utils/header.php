@@ -12,6 +12,7 @@
   <script src="./Content/js/script.js" defer></script>
   <script src="./Content/js/inscriptionPro.js" defer></script>
   <script src="./Content/js/adresse.js" defer></script>
+  <script src="./Content/js/password.js" defer></script>
   <!-- captcha google-->
   <!-- <script src="https://www.google.com/recaptcha/enterprise.js?render=6LdvkU4pAAAAALTI79SpmGzz32zYsFa2klLYdv4P"></script> -->
 

@@ -37,10 +37,7 @@
         <div class="col-6 invisible" id="afficherAnimal">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="./Content/img/userdefaut.png" class="img-fluid rounded-start"
-                            alt="vetotoil image user">
-                    </div>
+                    
                     <div class="col-md-8">
                         <div class="card-body">
                             <form class="col-lg-8" id="choix_animal">

@@ -38,6 +38,14 @@ class Controller_animal extends Controller
 
         $userData = ['enregistrer' => $m->get_enregistrer_animal($_POST)];
     }
+    public function action_supprimer_animal(){
+
+        $m = Model::get_model();
+
+        $suppAnimal = ['supprimer' => $m->get_supprimer_animal($_POST)];
+    }
 
 }
+
+
 ?>

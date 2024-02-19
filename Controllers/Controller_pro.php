@@ -83,6 +83,7 @@ public function action_connexion_pro(){
     public function action_enregistrement_employer(){
      
         $m = Model::get_model();
+      
         $pro = ['connexionProfessionnel' => $m->get_enregistrement_employer($_POST)];
 
         $this->render('ajout_employer');
@@ -106,6 +107,36 @@ public function action_connexion_pro(){
     }
   
 
+public function action_gestion_employer(){
+$siret=$_SESSION['siret'];
 
+    $m=Model ::get_model();
+     $employer = ['employer' => $m->get_recherche_tous_employer($siret)];
+   
+    $this->render('gestion_employer',$employer);
+}
+
+public function action_supprimer_employer(){
+    $siret=$_SESSION['siret'];
+    $employer=$_POST['employer'];
+
+
+    $m=Model ::get_model();
+    $suppr = ['suppr' => $m->get_supprimer_employer($siret,$employer)];
+    if($suppr){
+        $employer = ['employer' => $m->get_recherche_tous_employer($siret)];
+   
+        $this->render('gestion_employer',$employer);
+    }
+}
+
+public function action_editer_employer(){
+    $siret=$_SESSION['siret'];
+    $employer=$_POST['employer'];
+    $m=Model ::get_model();
+
+    $editer=['editer'=>$m->get_editer_employer($siret,$employer)];
+    $this->render('editer_employer',$editer);
+}
 
 }

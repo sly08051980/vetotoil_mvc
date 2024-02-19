@@ -16,7 +16,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#">Voir mes rdv</a></li>
                 <li><a class="dropdown-item" href="#">Rechercher toiletteur</a></li>
-                <li><a class="dropdown-item" href="#">Rechercher Vétérinaire</a></li>
+                <li><a class="dropdown-item" href="?controller=rdv&action=recherche_rdv&profession=Vétérinaire">Rechercher Vétérinaire</a></li>
+               
            
                 <li>
                     <hr class="dropdown-divider">

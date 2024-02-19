@@ -11,40 +11,54 @@ function validate_formulaire($data)
 
 function inserer_image($file)
 {
-    if (isset($_FILES['file'])) {
+    // Vérifier si un fichier a été transmis
+    if (!empty($_FILES['file']['name'])) {
 
+        // Récupérer les informations sur le fichier
         $tmpName = $_FILES['file']['tmp_name'];
         $name = $_FILES['file']['name'];
         $size = $_FILES['file']['size'];
-        $error = $_FILES['file']['error'];
 
-        $maxSize = 4000000;
+        // Vérifier que le fichier a été téléchargé avec succès
+        if (is_uploaded_file($tmpName)) {
 
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mimeType = finfo_file($finfo, $tmpName);
+            $maxSize = 4000000;
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
-        // Obtenir les informations sur le chemin du fichier
-        $pathInfo = pathinfo($name);
-        $extension = strtolower($pathInfo['extension']);
+            // Obtenir le type MIME du fichier
+            $mimeType = finfo_file($finfo, $tmpName);
 
-        // Tableau des extensions que l'on accepte
-        $extensions = ['jpg', 'png', 'jpeg', 'gif', 'svg'];
+            // Obtenir l'extension du fichier
+            $extension = strtolower(pathinfo($name, PATHINFO_EXTENSION));
 
-        if (
-            $mimeType == "image/jpeg" || $mimeType == "image/jpg" || $mimeType == "image/gif" ||
-            $mimeType == "image/png" || $mimeType == "image/svg+xml"
-        ) {
-            if (in_array($extension, $extensions) && $size <= $maxSize && $error == 0) {
+            // Tableau des extensions acceptées
+            $extensions = ['jpg', 'png', 'jpeg', 'gif', 'svg'];
+
+            // Vérifier si le type MIME et l'extension sont valides
+            if (
+                in_array($mimeType, ["image/jpeg", "image/jpg", "image/gif", "image/png", "image/svg+xml"]) &&
+                in_array($extension, $extensions) && $size <= $maxSize
+            ) {
                 $uniqueName = uniqid('', true);
-                $file = $uniqueName . "." . $extension;
+                $newFileName = $uniqueName . "." . $extension;
 
-                move_uploaded_file($tmpName, './Content/img/utilisateur/' . $file);
-                return $file;
+                // Déplacer le fichier téléchargé vers le répertoire de destination
+                if (move_uploaded_file($tmpName, './Content/img/utilisateur/' . $newFileName)) {
+                    return $newFileName;
+                } else {
+                    echo "Erreur lors du déplacement du fichier.";
+                }
             } else {
                 echo "Mauvaise extension ou taille trop grande";
             }
         } else {
-            echo "Mauvaise extension d'image ";
+            echo "Erreur lors du téléchargement du fichier.";
         }
-    }
+    } 
+
+}
+function mdp($data){
+    $data= password_hash($data, PASSWORD_DEFAULT);
+   return $data;
+  
 }

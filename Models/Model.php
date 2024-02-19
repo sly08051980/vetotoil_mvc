@@ -4,6 +4,8 @@ require_once "./Content/phpMailer/PHPMailer.php";
 require_once "./Content/phpMailer/SMTP.php";
 
 
+
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
@@ -91,6 +93,8 @@ class Model
             $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : "";
             $telephone = validate_formulaire($telephone);
             $password = isset($_POST['password']) ? $_POST['password'] : "";
+            $password = mdp($password);
+
 
             $email = isset($_POST['email']) ? $_POST['email'] : "";
             $email = validate_formulaire($email);
@@ -137,7 +141,7 @@ class Model
     }
     public function get_find_animal($animal)
     {
-     
+
         try {
             $requete = $this->bd->prepare('SELECT race_animal,id_race FROM race JOIN type ON race.id_type=type.id_type WHERE type.type_animal=:animal');
             $requete->execute(array(':animal' => $animal));
@@ -152,16 +156,27 @@ class Model
     public function get_session_connect()
     {
         try {
+
             $email = $_POST['email'];
-            $mdp = $_POST['password'];
+            $password = $_POST['password'];
 
-            $requete = $this->bd->prepare('SELECT * FROM patient WHERE email=:email AND mdp=:mdp');
-            $requete->execute(array(':email' => $email, 'mdp' => $mdp));
+
+            $requete = $this->bd->prepare('SELECT * FROM patient WHERE email=:email');
+            $requete->execute(array(':email' => $email));
+            $requete = $requete->fetch(PDO::FETCH_ASSOC);
+
+
+            if ($requete && password_verify($password, $requete['mdp'])) {
+
+                return $requete;
+            } else {
+
+                return false;
+            }
         } catch (PDOException $e) {
-            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+            // Gérer les erreurs de base de données
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage());
         }
-
-        return $requete->fetchAll(PDO::FETCH_OBJ);
     }
     //#######################################################################################################################
     //fonction inscription pro
@@ -192,9 +207,15 @@ class Model
             $email = isset($_POST['email']) ? $_POST['email'] : "";
             $email = validate_formulaire($email);
             $password = isset($_POST['password']) ? $_POST['password'] : "";
+            $password = mdp($password);
             $file = isset($_FILES['file']) ? $_FILES['file'] : "";
             $file1 = inserer_image($file);
-            $fileImage = "./Content/img/utilisateur/" . $file1;
+            if ($file1 == null) {
+                $fileImage = "";
+            } else {
+                $fileImage = "./Content/img/utilisateur/" . $file1;
+            }
+
 
             $administrateur = "Admin";
 
@@ -253,23 +274,56 @@ class Model
 
         try {
 
-            $requete = $this->bd->prepare('SELECT * FROM societe WHERE siret=:siret AND password=:mdp');
-            $requete->execute(array(':siret' => $siret, ':mdp' => $mdp));
+
+
+            $requete = $this->bd->prepare('SELECT * FROM societe WHERE siret=:siret');
+            $requete->execute(array(':siret' => $siret));
+            $requete = $requete->fetchAll(PDO::FETCH_OBJ);
+
+
+            if ($requete) {
+
+                foreach ($requete as $resultat) {
+
+                    if (password_verify($mdp, $resultat->password)) {
+
+                        return $resultat;
+                    }
+                }
+            } else {
+
+                return false;
+            }
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
-        return $requete->fetchAll(PDO::FETCH_OBJ);
+
     }
     public function get_recherche_pro_valide($siret, $mdp)
     {
         try {
             $status = "Valider";
-            $requete = $this->bd->prepare('SELECT * FROM societe WHERE siret=:siret AND password=:mdp AND status=:status');
-            $requete->execute(array(':siret' => $siret, ':mdp' => $mdp, ':status' => $status));
+            $requete = $this->bd->prepare('SELECT * FROM societe WHERE siret=:siret AND status=:status');
+            $requete->execute(array(':siret' => $siret, ':status' => $status));
+            $requete = $requete->fetchAll(PDO::FETCH_OBJ);
+
+            if ($requete) {
+
+                foreach ($requete as $resultat) {
+
+                    if (password_verify($mdp, $resultat->password)) {
+
+                        return $resultat;
+                    }
+                }
+            } else {
+
+                return false;
+            }
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
-        return $requete->fetchAll(PDO::FETCH_OBJ);
+
     }
 
     //#######################################################################################################################
@@ -290,9 +344,18 @@ class Model
             $email = $_POST['email'];
             $profession = $_POST['profession'];
             $password = $_POST['password'];
+            $password = mdp($password);
+
+
             $file = isset($_FILES['file']) ? $_FILES['file'] : "";
             $file1 = inserer_image($file);
-            $fileImage = "./Content/img/utilisateur/" . $file1;
+
+            if ($file1 == null) {
+                $fileImage = "";
+            } else {
+                $fileImage = "./Content/img/utilisateur/" . $file1;
+            }
+
             $dates = date("Y-m-d");
 
             $requete = $this->bd->prepare("INSERT INTO employer (id_employer, nom, prenom, adresse, complement_adresse, code_postal,
@@ -363,7 +426,41 @@ class Model
 
         return $requete->fetchAll(PDO::FETCH_OBJ);
     }
+public function get_recherche_tous_employer($siret){
+try{
+  
+    $requete=$this->bd->prepare("SELECT * FROM ajouter INNER JOIN employer ON ajouter.id_employer=employer.id_employer  WHERE siret =:siret  AND date_sortie_employer IS NULL");
+    $requete->execute(array(':siret'=>$siret ));
+    return $requete->fetchAll(PDO::FETCH_OBJ);
+}catch (PDOException $e) {
+    die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+}
+}
 
+public function get_supprimer_employer($siret,$employer){
+try{
+    $dates = date("Y-m-d");
+    $requete=$this->bd->prepare("UPDATE ajouter SET date_sortie_employer=:dates  WHERE siret = :siret AND id_employer= :employer");
+    $requete->execute(array(':dates'=>$dates,':siret'=>$siret,':employer'=>$employer));
+    return $requete->fetchAll(PDO::FETCH_OBJ);
+
+}catch (PDOException $e) {
+    die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+}
+
+}
+
+public function get_editer_employer($siret,$employer){
+    try{
+    $requete=$this->bd->prepare("SELECT * FROM ajouter INNER JOIN employer ON ajouter.id_employer=employer.id_employer  
+    WHERE siret =:siret  AND date_sortie_employer IS NULL AND ajouter.id_employer =:employer");
+
+    $requete->execute(array(':siret'=>$siret,'employer'=>$employer ));
+    return $requete->fetchAll(PDO::FETCH_OBJ);
+}catch (PDOException $e) {
+    die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+}
+}
     public function get_modifier_pro($siret)
     {
         try {
@@ -423,15 +520,16 @@ class Model
     //#######################################################################################################################
     //fonction ajouter animal
     //#######################################################################################################################
-    public function get_enregistrer_animal(array $data){
+    public function get_enregistrer_animal(array $data)
+    {
         try {
             $id = $_POST['patient'];
-          
-            $prenom=$_POST['prenom'];
-            $dateNaissance=$_POST['dateNaissance'];
-            $race=$_POST['numero'];
+
+            $prenom = $_POST['prenom'];
+            $dateNaissance = $_POST['dateNaissance'];
+            $race = $_POST['numero'];
             $dates = date("Y-m-d");
-            $requete = $this->bd->prepare('INSERT INTO animal (id_animal, prenom_animal, date_naissance,date_creation,date_fin, id_race, id_patient)
+            $requete = $this->bd->prepare('INSERT INTO animal (id_animal, prenom_animal, date_naissance_animal,date_creation_animal,date_fin_animal, id_race, id_patient)
              VALUES (NULL, :prenom, :dateNaissance,:dates,Null, :race, :id);');
 
 
@@ -440,28 +538,177 @@ class Model
                 ':race' => $race,
                 ':dateNaissance' => $dateNaissance,
                 ':id' => $id,
-                ':dates'=>$dates
+                ':dates' => $dates
             ]);
-         
-        
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
-
     }
-    public function get_modifier_animal($idPatient){
+    public function get_modifier_animal($idPatient)
+    {
         try {
 
             // $requete = $this->bd->prepare('SELECT * FROM animal WHERE id_patient =:id');
-            $requete = $this->bd->prepare('SELECT animal.id_animal,animal.prenom,race.race_animal,patient.nom,patient.prenom 
-            FROM animal JOIN race ON animal.id_race=race.id_race JOIN patient ON animal.id_patient=patient.id_patient WHERE animal.id_patient=:id');
-            
+            $requete = $this->bd->prepare('SELECT animal.date_naissance_animal, animal.id_animal,animal.prenom_animal,race.race_animal,patient.nom,patient.prenom 
+            FROM animal JOIN race ON animal.id_race=race.id_race JOIN patient ON animal.id_patient=patient.id_patient WHERE animal.id_patient=:id AND animal.date_fin_animal IS NULL');
+
             $requete->execute(array(':id' => $idPatient));
         } catch (PDOException $e) {
             die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
         }
 
-return $requete->fetchAll(PDO::FETCH_OBJ);
+        return $requete->fetchAll(PDO::FETCH_OBJ);
+    }
 
+    public function get_supprimer_animal(array $data)
+    {
+        try {
+            $idAnimal = $_POST['idAnimal'];
+            $dates = date("Y-m-d");
+            $requete = $this->bd->prepare('UPDATE animal SET date_fin_animal = :dates WHERE animal.id_animal = :idAnimal');
+            $requete->execute(array(':idAnimal' => $idAnimal, ':dates' => $dates));
+        } catch (PDOException $e) {
+            die('Erreur [' . $e->getCode() . '] : ' . $e->getMessage() . '</p>');
+        }
+    }
+
+
+    public function get_recherche_rdv($profession)
+    {
+        // recherche sur deux semaine
+        $date_debut = date('Y-m-d');
+        $date_fin = date('Y-m-d', strtotime('+14 days'));
+
+        // Recherche des informations sur la commune
+        $requete_commune = $this->bd->prepare("SELECT * FROM commune WHERE code_postal = '13011'");
+        $requete_commune->execute();
+        $row = $requete_commune->fetch(PDO::FETCH_ASSOC);
+
+        $latitude = $row['latitude'];
+        $longitude = $row['longitude'];
+        // echo "Latitude: $latitude<br>";
+        // echo "Longitude: $longitude<br>";
+
+        $formule = "(6366*acos(cos(radians($latitude))*cos(radians(`latitude`))*cos(radians(`longitude`)-radians($longitude))+sin(radians($latitude))*sin(radians(`latitude`))))";
+        // distance 10km
+        $distance = 10;
+        $sql = "SELECT nom_commune, $formule AS dist FROM commune WHERE $formule <= :distance ORDER BY dist ASC";
+        $res = $this->bd->prepare($sql);
+        $res->bindParam(':distance', $distance);
+        $res->execute();
+
+        $r = $res->fetch(PDO::FETCH_ASSOC);
+
+        // Recherche des employés
+        $requete_employes = $this->bd->prepare("
+        SELECT e.id_employer, e.nom, e.prenom, a.jours_travailler,
+               s.adresse, s.complement_adresse, s.code_postal, s.ville, s.telephone_societe, s.nom_societe 
+        FROM employer e 
+        INNER JOIN ajouter a ON e.id_employer = a.id_employer 
+        INNER JOIN societe s ON s.siret = a.siret 
+        WHERE e.profession = :profession 
+          AND s.code_postal IN (
+              SELECT code_postal 
+              FROM commune 
+              WHERE $formule <= :distance
+          )
+    ");
+
+        $requete_employes->execute(array(':profession' => $profession, ':distance' => $distance));
+        $employes = $requete_employes->fetchAll(PDO::FETCH_ASSOC);
+
+        $tableau = [];
+
+
+        foreach ($employes as $employe) {
+
+            $employe_id = $employe['id_employer'];
+
+
+            $tableau[$employe_id] = [
+
+                "nom" => $employe['nom'],
+                "prenom" => $employe['prenom'],
+                "profession" => $profession,
+                'date_debut' => $date_debut,
+                "date_fin" => $date_fin,
+                "telephone_societe" => $employe['telephone_societe'],
+                "adresse" => $employe['adresse'],
+                "complement_adresse" => $employe['complement_adresse'],
+                "code_postal" => $employe['code_postal'],
+                "ville" => $employe['ville']
+
+
+            ];
+
+
+            $jours_travailles = json_decode($employe['jours_travailler'], true);
+
+
+            // Boucle sur chaque jour de la période
+            $date = $date_debut;
+            while ($date <= $date_fin) {
+                $jour_semaine_fr = strtolower(date('l', strtotime($date)));
+
+                // Traduire le jour de la semaine en français
+                switch ($jour_semaine_fr) {
+                    case 'monday':
+                        $jour_semaine_fr = 'lundi';
+                        break;
+                    case 'tuesday':
+                        $jour_semaine_fr = 'mardi';
+                        break;
+                    case 'wednesday':
+                        $jour_semaine_fr = 'mercredi';
+                        break;
+                    case 'thursday':
+                        $jour_semaine_fr = 'jeudi';
+                        break;
+                    case 'friday':
+                        $jour_semaine_fr = 'vendredi';
+                        break;
+                    case 'saturday':
+                        $jour_semaine_fr = 'samedi';
+                        break;
+                    case 'sunday':
+                        $jour_semaine_fr = 'dimanche';
+                        break;
+                }
+
+                // Vérifier si le jour fait partie des jours travaillés de l'employé
+                if (in_array($jour_semaine_fr, $jours_travailles)) {
+                    // Requête pour récupérer les créneaux horaires déjà pris pour cet employé pour cette date
+                    $sql_pris = "SELECT heure FROM rdv WHERE date_rdv = :date AND id_employer = :id_employer";
+                    $stmt_pris = $this->bd->prepare($sql_pris);
+                    $stmt_pris->bindParam(':date', $date);
+                    $stmt_pris->bindParam(':id_employer', $employe_id);
+                    $stmt_pris->execute();
+                    $creneaux_pris = $stmt_pris->fetchAll(PDO::FETCH_COLUMN);
+
+                    // Générer une liste de tous les créneaux horaires possibles (par exemple, de 9h à 17h)
+                    $creneaux_possibles = [];
+                    for ($i = 9; $i < 17; $i++) {
+                        $creneaux_possibles[] = sprintf("%02d:00:00", $i);
+                    }
+
+                    // Filtrer les créneaux horaires disponibles en excluant ceux qui sont déjà pris
+                    $creneaux_disponibles = array_diff($creneaux_possibles, $creneaux_pris);
+
+                    $tableau[$employe_id] += [
+                        "$date" => [
+                            "$jour_semaine_fr" => [
+                                $creneaux_disponibles
+                            ]
+                        ]
+                    ];
+
+                }
+
+                // Passer à la prochaine date
+                $date = date('Y-m-d', strtotime($date . ' +1 day'));
+            }
+        }
+
+        return $tableau;
     }
 }

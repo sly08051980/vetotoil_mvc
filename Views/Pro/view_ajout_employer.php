@@ -26,7 +26,7 @@
     <div class="col-12 col-sm-8 invisible" id="employer">
         <div class="card">
         <div class="card shadow-lg p-3 mb-5 bg-body rounded border-5 ">
-            <form action="?controller=pro&action=enregistrement_employer" method="POST">
+            <form action="?controller=pro&action=enregistrement_employer" method="POST" enctype="multipart/form-data">
 
                 <div class="row">
                     <div class="col-12 col-sm-6">
@@ -87,6 +87,45 @@
                             <input type="password" class="form-control" name="password" id="password"
                                 autocomplete="off">
                         </div>
+                        <ul id="ulVisible" class="d-none">
+                            <div class="row">
+                                <div class="col-4">
+                                <img src="./Content/img/valider.png"class="img-thumbnail d-none" id="chiffre" width="25%">
+                            
+                                </div>
+                                <div class=col-8>
+                                <li class="text-font">Mettre des lettres et de chiffres</li>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                <img src="./Content/img/valider.png"class="img-thumbnail d-none" id="majuscule" width="25%">
+                            
+                                </div>
+                                <div class=col-8>
+                                <li class="text-font">Une ou plusieurs Majuscule</li>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                <img src="./Content/img/valider.png"class="img-thumbnail d-none" id="caractere" width="25%">
+                            
+                                </div>
+                                <div class=col-8>
+                                <li class="text-font">8 Caractères minimum</li>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                <img src="./Content/img/valider.png"class="img-thumbnail d-none" id="special" width="25%">
+                            
+                                </div>
+                                <div class=col-8>
+                                <li class="text-font">1 Caractere special</li>
+                                </div>
+                            </div>
+                           
+                            </ul>
                         <div class="mb-3">
                             <label for="repassword" class="form-label">Confirmer le mot de passe</label>
                             <input type="password" class="form-control" id="repassword" autocomplete="off">
